@@ -18,19 +18,26 @@
 
  $(document).ready(function () {
 
-
-
     var occupationOnetCode;
 
-    //when submit button is pushed
-    $("#submit").on("click", function (event) {
-        event.preventDefault();
-        var term = $("#cr-title").val().trim();
+    var location;
 
-        var location = $("#location").val();
+    var term;
+
+    $(".state").on("click", function (){
+        location = $(this).attr("value");
+        console.log(location);
+    })
+
+    $(".search-term").on("click", function (){
+        term = $(this).attr("value");
+        console.log(term);
+    })
+
+    //when submit button is pushed
+    $("#submitBtn").on("click", function (event) {
 
         const urlTitleDescription = "https://api.careeronestop.org/v1/occupation/JSoak5q9cSjVtxE/" + term + "/N/0/10"
-
 
             $.ajax({
                 url: urlTitleDescription,
