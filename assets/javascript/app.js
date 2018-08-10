@@ -7,15 +7,24 @@
 
   Your Token key:
   EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA== 
+--------------------------------------------------------
+  data.gov
+  college score card
+  ----------------------
+  a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe
+
+    You can start using this key to make web service requests. Simply pass your key in the URL when making a web request. Here's an example:
+
+    https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe&location=Denver+CO
   
   */
 
     $(document).ready(function () {
 
         //when submit button is pushed
-        $("#sButton").on("click", function () {
+        $(".dropdown-item").on("click", function () {
 
-            var term = $("#search-input").val().trim();
+            var term = $(this).val().trim();
 
             const url = "https://api.careeronestop.org/v1/occupation/JSoak5q9cSjVtxE/" + term + "/N/0/10"
 
@@ -30,19 +39,19 @@
                     Accept: "application/json"
                 }
             }).then(response => {
-                console.log(JSON.stringify(response));
+                console.log(response);
 
-                for (i = 0; i < response.OccupationList.length; i++) {
+                for (i = 0; i < 1; i++) {
 
                     var occupationTitle = response.OccupationList[i].OnetTitle;
                     console.log(occupationTitle);
                     var occupationDescription = response.OccupationList[i].OccupationDescription;
                     console.log(occupationDescription)
 
-                    var newDiv = $("newDiv");
-                    newDiv.html("<h3>" + occupationTitle + "</h3>");
-                    newDiv.html("<p>" + occupationDescription + "</p>");
-                    $("#response").append(newDiv);
+                    var newDiv = $("<div>");
+                    newDiv.append("<p>" + occupationTitle + "</p>");
+                    newDiv.append("<p>" + occupationDescription + "</p>");
+                    $(".panel").append(newDiv);
 
                 };
             })
