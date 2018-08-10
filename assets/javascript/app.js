@@ -34,18 +34,6 @@
     });
 
    
-    // $(".state option").click(function(v) {
-    //     console.log("state dropdown clicked");
-    //     //location = $(this).options[(this).selectedIndex].id;
-    //     //console.log(location);
-    // });
-
-    $(document).on("click", ".search-term", function (){
-        console.log("occupation dropdown clicked");
-        term = $(this).attr("value");
-        console.log(term);
-    });
-
     //when submit button is pushed
     $(document).on("click", "#submitBtn", function (event) {
         console.log("button clicked");
