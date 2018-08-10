@@ -66,11 +66,11 @@
                             </label>
                             <select class="form-control careerField" id="medicalCareers">
                                 <option value="">Browse Medical Careers:</option>
-                                <option value="Physician Assistants">Physician Assistants</option>
-                                <option value="Nurse Practitioners">Nurse Practitioners</option>
-                                <option value="Physical Therapist ">Physical Therapist Assistants</option>
-                                <option value="Internists, General">Internists, General</option>
-                                <option value="Pharmacy Technicians">Pharmacy Technicians</option>
+                                <option class="search-term" value="Physician Assistants">Physician Assistants</option>
+                                <option class="search-term" value="Nurse Practitioners">Nurse Practitioners</option>
+                                <option class="search-term" value="Physical Therapist ">Physical Therapist Assistants</option>
+                                <option class="search-term" value="Internists, General">Internists, General</option>
+                                <option class="search-term" value="Pharmacy Technicians">Pharmacy Technicians</option>
                             </select>
                         </div>
                     </div>
@@ -84,11 +84,11 @@
                             </label>
                             <select class="form-control careerField" id="medicalCareers">
                                 <option value="">Browse Science Careers:</option>
-                                <option value="Biologists">Biologists</option>
-                                <option value="Environmental Scientists and Specialists, Including Health">Environmental Scientists and Specialists, Including Health</option>
-                                <option value="Political Scientist">Political Scientist</option>
-                                <option value="Molecular and Cellular Biologists">Molecular and Cellular Biologists</option>
-                                <option value="Medical and Clinical Laboratory Technologists">Medical and Clinical Laboratory Technologists</option>
+                                <option class="search-term" value="Biologists">Biologists</option>
+                                <option class="search-term" value="Environmental Scientists and Specialists, Including Health">Environmental Scientists and Specialists, Including Health</option>
+                                <option class="search-term" value="Political Scientist">Political Scientist</option>
+                                <option class="search-term" value="Molecular and Cellular Biologists">Molecular and Cellular Biologists</option>
+                                <option class="search-term" value="Medical and Clinical Laboratory Technologists">Medical and Clinical Laboratory Technologists</option>
                             </select>
                         </div>
                     </div>
@@ -102,11 +102,11 @@
                             </label>
                             <select class="form-control careerField" id="medicalCareers">
                                 <option value="">Browse Tech Careers:</option>
-                                <option value="Software Developers, Applications">Software Developers, Applications</option>
-                                <option value="Software Quality Assurance Engineers and Tester">Software Quality Assurance Engineers and Testers</option>
-                                <option value="Web Developers">Web Developers</option>
-                                <option value="Database Architects">Database Architects</option>
-                                <option value="Computer Programmers">Computer Programmers</option>
+                                <option class="search-term" value="Software Developers, Applications">Software Developers, Applications</option>
+                                <option class="search-term" value="Software Quality Assurance Engineers and Tester">Software Quality Assurance Engineers and Testers</option>
+                                <option class="search-term" value="Web Developers">Web Developers</option>
+                                <option class="search-term" value="Database Architects">Database Architects</option>
+                                <option class="search-term" value="Computer Programmers">Computer Programmers</option>
                             </select>
                         </div>
                     </div>
@@ -126,64 +126,64 @@
                                 <i class="fas fa-map-marked"></i>
                             </label>
                             <select class="form-control" id="state" name="state">
-                                <option value="">Browse States:</option>
-                                <option value="AK">Alaska</option>
-                                <option value="AL">Alabama</option>
-                                <option value="AR">Arkansas</option>
-                                <option value="AZ">Arizona</option>
-                                <option value="CA">California</option>
-                                <option value="CO">Colorado</option>
-                                <option value="CT">Connecticut</option>
-                                <option value="DC">District of Columbia</option>
-                                <option value="DE">Delaware</option>
-                                <option value="FL">Florida</option>
-                                <option value="GA">Georgia</option>
-                                <option value="HI">Hawaii</option>
-                                <option value="IA">Iowa</option>
-                                <option value="ID">Idaho</option>
-                                <option value="IL">Illinois</option>
-                                <option value="IN">Indiana</option>
-                                <option value="KS">Kansas</option>
-                                <option value="KY">Kentucky</option>
-                                <option value="LA">Louisiana</option>
-                                <option value="MA">Massachusetts</option>
-                                <option value="MD">Maryland</option>
-                                <option value="ME">Maine</option>
-                                <option value="MI">Michigan</option>
-                                <option value="MN">Minnesota</option>
-                                <option value="MO">Missouri</option>
-                                <option value="MS">Mississippi</option>
-                                <option value="MT">Montana</option>
-                                <option value="NC">North Carolina</option>
-                                <option value="ND">North Dakota</option>
-                                <option value="NE">Nebraska</option>
-                                <option value="NH">New Hampshire</option>
-                                <option value="NJ">New Jersey</option>
-                                <option value="NM">New Mexico</option>
-                                <option value="NV">Nevada</option>
-                                <option value="NY">New York</option>
-                                <option value="OH">Ohio</option>
-                                <option value="OK">Oklahoma</option>
-                                <option value="OR">Oregon</option>
-                                <option value="PA">Pennsylvania</option>
-                                <option value="PR">Puerto Rico</option>
-                                <option value="RI">Rhode Island</option>
-                                <option value="SC">South Carolina</option>
-                                <option value="SD">South Dakota</option>
-                                <option value="TN">Tennessee</option>
-                                <option value="TX">Texas</option>
-                                <option value="UT">Utah</option>
-                                <option value="VA">Virginia</option>
-                                <option value="VT">Vermont</option>
-                                <option value="WA">Washington</option>
-                                <option value="WI">Wisconsin</option>
-                                <option value="WV">West Virginia</option>
-                                <option value="WY">Wyoming</option>
+                                <option id="">Browse States:</option>
+                                <option class="state" id="AK">Alaska</option>
+                                <option class="state" id="AL">Alabama</option>
+                                <option class="state" id="AR">Arkansas</option>
+                                <option class="state" id="AZ">Arizona</option>
+                                <option class="state" id="CA">California</option>
+                                <option class="state" id="CO">Colorado</option>
+                                <option class="state" id="CT">Connecticut</option>
+                                <option class="state" id="DC">District of Columbia</option>
+                                <option class="state" id="DE">Delaware</option>
+                                <option class="state" id="FL">Florida</option>
+                                <option class="state" id="GA">Georgia</option>
+                                <option class="state" id="HI">Hawaii</option>
+                                <option class="state" id="IA">Iowa</option>
+                                <option class="state" id="ID">Idaho</option>
+                                <option class="state" id="IL">Illinois</option>
+                                <option class="state" id="IN">Indiana</option>
+                                <option class="state" id="KS">Kansas</option>
+                                <option class="state" id="KY">Kentucky</option>
+                                <option class="state" id="LA">Louisiana</option>
+                                <option class="state" id="MA">Massachusetts</option>
+                                <option class="state" id="MD">Maryland</option>
+                                <option class="state" id="ME">Maine</option>
+                                <option class="state" id="MI">Michigan</option>
+                                <option class="state" id="MN">Minnesota</option>
+                                <option class="state" id="MO">Missouri</option>
+                                <option class="state" id="MS">Mississippi</option>
+                                <option class="state" id="MT">Montana</option>
+                                <option class="state" id="NC">North Carolina</option>
+                                <option class="state" id="ND">North Dakota</option>
+                                <option class="state" id="NE">Nebraska</option>
+                                <option class="state" id="NH">New Hampshire</option>
+                                <option class="state" id="NM">New Mexico</option>
+                                <option class="state" id="NV">Nevada</option>
+                                <option class="state" id="NY">New York</option>
+                                <option class="state" id="OH">Ohio</option>
+                                <option class="state" id="OK">Oklahoma</option>
+                                <option class="state" id="OR">Oregon</option>
+                                <option class="state" id="PA">Pennsylvania</option>
+                                <option class="state" id="PR">Puerto Rico</option>
+                                <option class="state" id="RI">Rhode Island</option>
+                                <option class="state" id="SC">South Carolina</option>
+                                <option class="state" id="SD">South Dakota</option>
+                                <option class="state" id="TN">Tennessee</option>
+                                <option class="state" id="TX">Texas</option>
+                                <option class="state" id="UT">Utah</option>
+                                <option class="state" id="VA">Virginia</option>
+                                <option class="state" id="VT">Vermont</option>
+                                <option class="state" id="WA">Washington</option>
+                                <option class="state" id="WI">Wisconsin</option>
+                                <option class="state" id="WV">West Virginia</option>
+                                <option class="state" id="WY">Wyoming</option>
                             </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
+                            <button id="searchBtn">Search</button>
                         </div>
                     </div>
                 </div>
