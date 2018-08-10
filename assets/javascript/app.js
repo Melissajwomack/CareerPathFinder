@@ -1,10 +1,8 @@
 /* APIs
-
   careerOneStop
   ----------------------
   Your unique user ID:
   JSoak5q9cSjVtxE
-
   Your Token key:
   EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA== 
 --------------------------------------------------------
@@ -12,14 +10,14 @@
   college score card
   ----------------------
   a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe
-
     You can start using this key to make web service requests. Simply pass your key in the URL when making a web request. Here's an example:
 
     https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe&location=Denver+CO
   
   */
 
-$(document).ready(function () {
+ $(document).ready(function () {
+
 
 
     var occupationOnetCode;
