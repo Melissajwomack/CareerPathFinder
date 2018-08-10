@@ -19,16 +19,20 @@
   
   */
 
-    $(document).ready(function () {
+$(document).ready(function () {
 
-        //when submit button is pushed
-        $(".dropdown-item").on("click", function () {
 
-            var term = $(this).val().trim();
+    var occupationOnetCode;
 
-            const url = "https://api.careeronestop.org/v1/occupation/JSoak5q9cSjVtxE/" + term + "/N/0/10"
+    //when submit button is pushed
+    $("#submit").on("click", function (event) {
+        event.preventDefault();
+        var term = $("#cr-title").val().trim();
 
-            console.log(term);
+        var location = $("#location").val();
+
+        const urlTitleDescription = "https://api.careeronestop.org/v1/occupation/JSoak5q9cSjVtxE/" + term + "/N/0/10"
+
 
             $.ajax({
                 url: url,
@@ -41,19 +45,39 @@
             }).then(response => {
                 console.log(response);
 
-                for (i = 0; i < 1; i++) {
+            for (i = 0; i < response.OccupationList.length; i++) {
 
-                    var occupationTitle = response.OccupationList[i].OnetTitle;
-                    console.log(occupationTitle);
-                    var occupationDescription = response.OccupationList[i].OccupationDescription;
-                    console.log(occupationDescription)
+                var occupationTitle = response.OccupationList[i].OnetTitle;
+                console.log(occupationTitle);
+                var occupationDescription = response.OccupationList[i].OccupationDescription;
+                console.log(occupationDescription)
 
-                    var newDiv = $("<div>");
-                    newDiv.append("<p>" + occupationTitle + "</p>");
-                    newDiv.append("<p>" + occupationDescription + "</p>");
-                    $(".panel").append(newDiv);
+                var newDiv = $("newDiv");
+                newDiv.html("<h3>" + occupationTitle + "</h3>");
+                newDiv.html("<p>" + occupationDescription + "</p>");
+                $("#response").append(newDiv);
 
-                };
-            })
+
+                occupationOnetCode = response.OccupationList[i].OnetCode;
+                console.log(occupationOnetCode);
+
+                const urlOnetCode = "https://api.careeronestop.org/v1/lmi/JSoak5q9cSjVtxE/" + occupationOnetCode + location
+        
+                $.ajax({
+                    url: urlOnetCode,
+                    method: "GET",
+                    headers: {
+                        // OUR API TOKEN
+                        Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
+                        Accept: "application/json"
+                    }
+                }).then(response => {
+                    console.log(JSON.stringify(response));
+        
+                });
+            };
         });
+
+
     });
+});
