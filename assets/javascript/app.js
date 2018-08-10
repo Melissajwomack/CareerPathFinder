@@ -11,11 +11,13 @@
   ----------------------
   a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe
     You can start using this key to make web service requests. Simply pass your key in the URL when making a web request. Here's an example:
+
     https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe&location=Denver+CO
   
   */
 
  $(document).ready(function () {
+
 
 
     var occupationOnetCode;
