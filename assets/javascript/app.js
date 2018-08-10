@@ -15,7 +15,7 @@
     https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe&location=Denver+CO
   
   */
- $(document).ready(function () {
+$(document).ready(function () {
 
     var occupationOnetCode;
 
@@ -23,33 +23,35 @@
 
     var term;
 
-    $(".career-options").on("change", function(){
+    $(".career-options").on("change", function () {
         term = $(this).val();
         console.log(term);
     });
 
-    $("#state").on("change", function(){
+    $("#state").on("change", function () {
         location = $(this).val();
         console.log(location);
     });
 
-   
+
     //when submit button is pushed
     $(document).on("click", "#submitBtn", function (event) {
         console.log("button clicked");
 
+        // Job title and job description
+        // Getting ONetCode for other calls
         const urlTitleDescription = "https://api.careeronestop.org/v1/occupation/JSoak5q9cSjVtxE/" + term + "/N/0/10"
 
-            $.ajax({
-                url: urlTitleDescription,
-                method: "GET",
-                headers: {
-                    // OUR API TOKEN
-                    Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
-                    Accept: "application/json"
-                }
-            }).then(response => {
-                console.log(response);
+        $.ajax({
+            url: urlTitleDescription,
+            method: "GET",
+            headers: {
+                // OUR API TOKEN
+                Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
+                Accept: "application/json"
+            }
+        }).then(response => {
+            console.log(response);
 
             for (i = 0; i < response.OccupationList.length; i++) {
 
@@ -63,12 +65,12 @@
                 newDiv.html("<p>" + occupationDescription + "</p>");
                 $("#response").append(newDiv);
 
-
                 occupationOnetCode = response.OccupationList[i].OnetCode;
                 console.log(occupationOnetCode);
 
+                // Salary information for state and national
                 const urlOnetCode = "https://api.careeronestop.org/v1/lmi/JSoak5q9cSjVtxE/" + occupationOnetCode + location
-        
+
                 $.ajax({
                     url: urlOnetCode,
                     method: "GET",
@@ -79,9 +81,12 @@
                     }
                 }).then(response => {
                     console.log(JSON.stringify(response));
-        
+                    // "AveragePayState": "74240",
+                    // "AveragePayNational": "69400",
+
                 });
 
+                // School information for state related to chosen career
                 const urlProgramsbyOccpation = "https://api.careeronestop.org/v1/lmi/JSoak5q9cSjVtxE" + occupationOnetCode + location + "/50/0/0/0/0/0/0/0/0/5"
 
                 $.ajax({
@@ -94,8 +99,14 @@
                     }
                 }).then(response => {
                     console.log(JSON.stringify(response));
-        
+                    // School name
+                    // City and state
+                    // Program name
                 });
+
+                // Typical education for chosen career 
+
+                
                 // Data.gov ajax
                 const urlDataGov = "";
 
@@ -105,8 +116,8 @@
                 }).then(response => {
                     console.log(JSON.stringify(response));
                 });
-        }
-    });
+            }
+        });
 
 
     });
