@@ -33,7 +33,7 @@
 
 
             $.ajax({
-                url: url,
+                url: urlTitleDescription,
                 method: "GET",
                 headers: {
                     // OUR API TOKEN
@@ -63,6 +63,21 @@
         
                 $.ajax({
                     url: urlOnetCode,
+                    method: "GET",
+                    headers: {
+                        // OUR API TOKEN
+                        Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
+                        Accept: "application/json"
+                    }
+                }).then(response => {
+                    console.log(JSON.stringify(response));
+        
+                });
+
+                const urlProgramsbyOccpation = "https://api.careeronestop.org/v1/lmi/JSoak5q9cSjVtxE" + occupationOnetCode + location + "/50/0/0/0/0/0/0/0/0/5"
+
+                $.ajax({
+                    url: urlProgramsbyOccpation,
                     method: "GET",
                     headers: {
                         // OUR API TOKEN
