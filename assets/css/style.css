@@ -4,6 +4,7 @@ header {
     background-size: 100%;
     height: auto;
     min-height: 100%;
+    color: #fff;
 }
  body {
     background-image: url("../../assets/images/bodybg.jpg");
