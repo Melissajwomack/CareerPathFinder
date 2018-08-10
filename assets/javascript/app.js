@@ -1,16 +1,22 @@
 /* APIs
-
   careerOneStop
   ----------------------
   Your unique user ID:
   JSoak5q9cSjVtxE
-
   Your Token key:
   EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA== 
+--------------------------------------------------------
+  data.gov
+  college score card
+  ----------------------
+  a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe
+    You can start using this key to make web service requests. Simply pass your key in the URL when making a web request. Here's an example:
+    https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe&location=Denver+CO
   
   */
 
-$(document).ready(function () {
+ $(document).ready(function () {
+
 
     var occupationOnetCode;
 
@@ -23,18 +29,17 @@ $(document).ready(function () {
 
         const urlTitleDescription = "https://api.careeronestop.org/v1/occupation/JSoak5q9cSjVtxE/" + term + "/N/0/10"
 
-        console.log(term);
 
-        $.ajax({
-            url: urlTitleDescription,
-            method: "GET",
-            headers: {
-                // OUR API TOKEN
-                Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
-                Accept: "application/json"
-            }
-        }).then(response => {
-            console.log(JSON.stringify(response));
+            $.ajax({
+                url: url,
+                method: "GET",
+                headers: {
+                    // OUR API TOKEN
+                    Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
+                    Accept: "application/json"
+                }
+            }).then(response => {
+                console.log(response);
 
             for (i = 0; i < response.OccupationList.length; i++) {
 
