@@ -15,7 +15,6 @@
     https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe&location=Denver+CO
   
   */
-
  $(document).ready(function () {
 
     var occupationOnetCode;
@@ -24,18 +23,20 @@
 
     var term;
 
-    $(".state").on("click", function (){
-        location = $(this).attr("value");
-        console.log(location);
-    })
-
-    $(".search-term").on("click", function (){
-        term = $(this).attr("value");
+    $(".career-options").on("change", function(){
+        term = $(this).val();
         console.log(term);
-    })
+    });
 
+    $("#state").on("change", function(){
+        location = $(this).val();
+        console.log(location);
+    });
+
+   
     //when submit button is pushed
-    $("#submitBtn").on("click", function (event) {
+    $(document).on("click", "#submitBtn", function (event) {
+        console.log("button clicked");
 
         const urlTitleDescription = "https://api.careeronestop.org/v1/occupation/JSoak5q9cSjVtxE/" + term + "/N/0/10"
 
@@ -95,7 +96,7 @@
                     console.log(JSON.stringify(response));
         
                 });
-
+                // Data.gov ajax
                 const urlDataGov = "";
 
                 $.ajax({
@@ -104,7 +105,8 @@
                 }).then(response => {
                     console.log(JSON.stringify(response));
                 });
-        });
+        }
+    });
 
 
     });
