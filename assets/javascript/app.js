@@ -144,12 +144,6 @@ $(document).ready(function () {
             }
         }).then(response => {
 
-            // <div class="card bg-light mt-2">
-            // <h6 class="card-header text-center bg-light" style="color:darkslategray">Colleges and Universities</h6>
-            // <div class="card-body" style="padding:0px">
-            //     <p class="card-text" id=colleges></p>
-            // </div>
-
             for (var i = 0; i < response.SchoolPrograms.length; i++) {
 
                 //Add card for each school
