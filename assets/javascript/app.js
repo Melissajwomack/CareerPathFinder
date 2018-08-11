@@ -51,83 +51,165 @@ $(document).ready(function () {
                 Accept: "application/json"
             }
         }).then(response => {
-            console.log(response);
 
             for (i = 0; i < response.OccupationList.length; i++) {
 
-                var occupationTitle = response.OccupationList[i].OnetTitle;
-                console.log(occupationTitle);
-                var occupationDescription = response.OccupationList[i].OccupationDescription;
-                console.log(occupationDescription)
+                //Add card for each occupation in html
+
+                //Card
+                var occupationDiv = $("<div>").attr("class", "card bg-light");
+
+                //Title
+                var occupationTitleDiv = $("<h6>").attr("class", "card-header               text-center bg-light occupation-title");
+                occupationTitleDiv.attr("style", "color:darkslategray");
+
+                //Card body
+                var occupationCardBody = $("<div>").attr("class", "card-body");
+                occupationCardBody.attr("style", "padding:0px");
+
+                //Occuaption description
+                var occupationDescDiv = $("<p>").attr("class", "card-text")
 
                 // O*Net Code for each occupation
                 occupationOnetCode = response.OccupationList[i].OnetCode;
                 console.log(occupationOnetCode);
+                //Assign title with O*Net ID for use with other ajax calls
+                occupationTitleDiv.attr("value", occupationOnetCode);
+
+                //Populate divs with info
+                //Title
+                var occupationTitle = response.OccupationList[i].OnetTitle;
+                console.log(occupationTitle);
+                occupationTitleDiv.text(occupationTitle);
+
+                //Description
+                var occupationDescription = response.OccupationList[i].OccupationDescription;
+                console.log(occupationDescription)
+                occupationDescDiv.text(occupationDescription);
+
+                //Append divs to main drop down
+                occupationCardBody.append(occupationDescDiv);
+                occupationDiv.append(occupationTitleDiv);
+                occupationDiv.append(occupationCardBody);
+                $("#occupation-div").append(occupationDiv);
             }
         });
     });
 
 
     //When occupation is chosen
-    // $(document).on("click", "id for divs with occupations") function (){}
+    $(document).on("click", ".occupation-title", function () {
 
-    // Salary information for state and national for chosen occupation
-    // Typical education for chosen occupation 
-    const urlOnetCode = "https://api.careeronestop.org/v1/lmi/JSoak5q9cSjVtxE/" + occupationOnetCode + location
+        console.log($(this).attr("value"));
 
-    $.ajax({
-        url: urlOnetCode,
-        method: "GET",
-        headers: {
-            // OUR API TOKEN
-            Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
-            Accept: "application/json"
-        }
-    }).then(response => {
+        occupationOnetCode = $(this).attr("value");
 
-        console.log(response);
-        
-        console.log(response.LMI.AveragePay_State);
-        console.log(response.LMI.AveragePay_National);
-        console.log(response.LMI.TypicalTraining);
+        // Salary information for state and national for chosen occupation
+        // Typical education for chosen occupation 
+        const urlOnetCode = "https://api.careeronestop.org/v1/lmi/JSoak5q9cSjVtxE/" + occupationOnetCode + "/" + location
+
+        $.ajax({
+            url: urlOnetCode,
+            method: "GET",
+            headers: {
+                // OUR API TOKEN
+                Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
+                Accept: "application/json"
+            }
+        }).then(response => {
+
+            //Populate salary info
+            $("#salary").html("Average pay in " + location + ": " + response.LMI.AveragePayState +
+            "<br>" +
+            "National average pay: " + response.LMI.AveragePayState);
+            console.log(response.LMI.AveragePayState);
+            console.log(response.LMI.AveragePayNational);
+
+            //Populate education reqs
+            $("#edReqs").text("Typical education required: " + response.LMI.TypicalTraining)
+            console.log(response.LMI.TypicalTraining);
+
+        });
+
+        // School information for state related to chosen occupation
+        const urlProgramsbyOccpation = "https://api.careeronestop.org/v1/training/JSoak5q9cSjVtxE/" + occupationOnetCode + "/" + location + "/50/0/0/0/0/0/0/0/0/5"
+
+        $.ajax({
+            url: urlProgramsbyOccpation,
+            method: "GET",
+            headers: {
+                // OUR API TOKEN
+                Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
+                Accept: "application/json"
+            }
+        }).then(response => {
+
+            // <div class="card bg-light mt-2">
+            // <h6 class="card-header text-center bg-light" style="color:darkslategray">Colleges and Universities</h6>
+            // <div class="card-body" style="padding:0px">
+            //     <p class="card-text" id=colleges></p>
+            // </div>
+
+            for (var i = 0; i < response.SchoolPrograms.length; i++) {
+
+                //Add card for each school
+
+                //Card
+                var schoolDiv = $("<div>").attr("class", "card bg-light mt-2");
+
+                //Title
+                var schoolTitleDiv = $("<h6>").attr("class", "card-header text-center bg-light");
+                schoolTitleDiv.attr("style", "color:darkslategray");
+
+                //Card body
+                var schoolCardBody = $("<div>").attr("class", "card-body");
+                schoolCardBody.attr("style", "padding:0px");
+
+                //School info
+                var schoolInfoDiv = $("<p>").attr("class", "card-text");
+                schoolInfoDiv.attr("id", "colleges");
+
+                //Populate new divs
+
+                //Title
+                schoolTitleDiv.text(response.SchoolPrograms[i].SchoolName);
+                console.log(response.SchoolPrograms[i].SchoolName);
+
+                //School info
+                schoolInfoDiv.html(
+                    "City: " + response.SchoolPrograms[i].City +
+                    "<br>" +
+                    "State: " + response.SchoolPrograms[i].StateName +
+                    "<br>" +
+                    "Program Name: " + response.SchoolPrograms[i].ProgramName
+                );
+                console.log(response.SchoolPrograms[i].City);
+                console.log(response.SchoolPrograms[i].StateName);
+                console.log(response.SchoolPrograms[i].ProgramName);
+
+                //Append divs to main dropdown
+                schoolCardBody.append(schoolInfoDiv);
+                schoolDiv.append(schoolTitleDiv);
+                schoolDiv.append(schoolCardBody);
+                $(".colleges-div").append(schoolDiv);
+            }
+        });
 
     });
 
-    
-    // School information for state related to chosen occupation
-    const urlProgramsbyOccpation = "/v1/training/JSoak5q9cSjVtxE/" + occupationOnetCode + location + "/50/0/0/0/0/0/0/0/0/5"
 
-    $.ajax({
-        url: urlProgramsbyOccpation,
-        method: "GET",
-        headers: {
-            // OUR API TOKEN
-            Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
-            Accept: "application/json"
-        }
-    }).then(response => {
 
-        console.log(response);
 
-        for (var i = 0; i < response.SchoolPrograms.length; i++) {
-        console.log(response.SchoolPrograms[i].SchoolName);
-        console.log(response.SchoolPrograms[i].City);
-        console.log(response.SchoolPrograms[i].StateName);
-        console.log(response.SchoolPrograms[i].ProgramName);
-        }
-    });
-
-   
 
 
     // Data.gov ajax
-    const urlDataGov = "";
+    // const urlDataGov = "";
 
-    $.ajax({
-        url: urlDataGov,
-        method: "GET"
-    }).then(response => {
-        console.log(JSON.stringify(response));
-    });
+    // $.ajax({
+    //     url: urlDataGov,
+    //     method: "GET"
+    // }).then(response => {
+    //     console.log(JSON.stringify(response));
+    // });
 
 });
