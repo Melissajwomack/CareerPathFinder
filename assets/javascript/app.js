@@ -60,65 +60,74 @@ $(document).ready(function () {
                 var occupationDescription = response.OccupationList[i].OccupationDescription;
                 console.log(occupationDescription)
 
-                var newDiv = $("newDiv");
-                newDiv.html("<h3>" + occupationTitle + "</h3>");
-                newDiv.html("<p>" + occupationDescription + "</p>");
-                $("#response").append(newDiv);
-
+                // O*Net Code for each occupation
                 occupationOnetCode = response.OccupationList[i].OnetCode;
                 console.log(occupationOnetCode);
-
-                // Salary information for state and national
-                const urlOnetCode = "https://api.careeronestop.org/v1/lmi/JSoak5q9cSjVtxE/" + occupationOnetCode + location
-
-                $.ajax({
-                    url: urlOnetCode,
-                    method: "GET",
-                    headers: {
-                        // OUR API TOKEN
-                        Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
-                        Accept: "application/json"
-                    }
-                }).then(response => {
-                    console.log(JSON.stringify(response));
-                    // "AveragePayState": "74240",
-                    // "AveragePayNational": "69400",
-
-                });
-
-                // School information for state related to chosen career
-                const urlProgramsbyOccpation = "https://api.careeronestop.org/v1/lmi/JSoak5q9cSjVtxE" + occupationOnetCode + location + "/50/0/0/0/0/0/0/0/0/5"
-
-                $.ajax({
-                    url: urlProgramsbyOccpation,
-                    method: "GET",
-                    headers: {
-                        // OUR API TOKEN
-                        Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
-                        Accept: "application/json"
-                    }
-                }).then(response => {
-                    console.log(JSON.stringify(response));
-                    // School name
-                    // City and state
-                    // Program name
-                });
-
-                // Typical education for chosen career 
-
-                
-                // Data.gov ajax
-                const urlDataGov = "";
-
-                $.ajax({
-                    url: urlDataGov,
-                    method: "GET"
-                }).then(response => {
-                    console.log(JSON.stringify(response));
-                });
             }
         });
+    });
 
+
+    //When occupation is chosen
+    // $(document).on("click", "id for divs with occupations") function (){}
+
+    // Salary information for state and national for chosen occupation
+    // Typical education for chosen occupation 
+    const urlOnetCode = "https://api.careeronestop.org/v1/lmi/JSoak5q9cSjVtxE/" + occupationOnetCode + location
+
+    $.ajax({
+        url: urlOnetCode,
+        method: "GET",
+        headers: {
+            // OUR API TOKEN
+            Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
+            Accept: "application/json"
+        }
+    }).then(response => {
+
+        console.log(response);
+        
+        console.log(response.LMI.AveragePay_State);
+        console.log(response.LMI.AveragePay_National);
+        console.log(response.LMI.TypicalTraining);
 
     });
+
+    
+    // School information for state related to chosen occupation
+    const urlProgramsbyOccpation = "/v1/training/JSoak5q9cSjVtxE/" + occupationOnetCode + location + "/50/0/0/0/0/0/0/0/0/5"
+
+    $.ajax({
+        url: urlProgramsbyOccpation,
+        method: "GET",
+        headers: {
+            // OUR API TOKEN
+            Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
+            Accept: "application/json"
+        }
+    }).then(response => {
+
+        console.log(response);
+
+        for (var i = 0; i < response.SchoolPrograms.length; i++) {
+        console.log(response.SchoolPrograms[i].SchoolName);
+        console.log(response.SchoolPrograms[i].City);
+        console.log(response.SchoolPrograms[i].StateName);
+        console.log(response.SchoolPrograms[i].ProgramName);
+        }
+    });
+
+   
+
+
+    // Data.gov ajax
+    const urlDataGov = "";
+
+    $.ajax({
+        url: urlDataGov,
+        method: "GET"
+    }).then(response => {
+        console.log(JSON.stringify(response));
+    });
+
 });
