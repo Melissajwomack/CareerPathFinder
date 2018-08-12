@@ -12,10 +12,27 @@
   api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe
     You can start using this key to make web service requests. Simply pass your key in the URL when making a web request. Here's an example:
 
+    https://api.data.gov/ed/collegescorecard/v1/schools?api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe&school.name=University%20of%20Texas
+
+    visual search: https://collegescorecard.ed.gov/
+
+https://api.data.gov/ed/collegescorecard/v1/schools/?sort=2013.earnings.6_yrs_after_entry.percent_greater_than_25000%3Adesc&school.operating=1&2015.student.size__range=1..&2015.academics.program_available.assoc_or_bachelors=true
+
+&school.state=TX
+
+&school.degrees_awarded.predominant__range=1..3&school.degrees_awarded.highest__range=2..4&fields=id%2Cschool.name%2Cschool.city%2Cschool.state%2C2015.student.size%2Cschool.branches%2Cschool.ownership%2Cschool.degrees_awarded.predominant%2C2015.cost.avg_net_price.overall%2C2015.completion.rate_suppressed.overall%2C2013.earnings.10_yrs_after_entry.median%2C2013.earnings.6_yrs_after_entry.percent_greater_than_25000%2Cschool.under_investigation&api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe
+
     https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe&location=Denver+CO
   
   */
 $(document).ready(function () {
+
+
+    var dataGovAPIKey = "&api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe";
+
+    var schoolName = "University of Texas";
+
+    var schoolState = "TX";
 
     var occupationOnetCode;
 
@@ -30,6 +47,7 @@ $(document).ready(function () {
 
     $("#state").on("change", function () {
         location = $(this).val();
+        schoolState = location;
         console.log(location);
     });
 
@@ -60,7 +78,7 @@ $(document).ready(function () {
                 var occupationDiv = $("<div>").attr("class", "card bg-light");
 
                 //Title
-                var occupationTitleDiv = $("<h6>").attr("class", "card-header               text-center bg-light occupation-title");
+                var occupationTitleDiv = $("<h6>").attr("class", "card-header text-center bg-light occupation-title");
                 occupationTitleDiv.attr("style", "color:darkslategray");
 
                 //Card body
@@ -76,7 +94,39 @@ $(document).ready(function () {
                 //Assign title with O*Net ID for use with other ajax calls
                 occupationTitleDiv.attr("value", occupationOnetCode);
 
-                //Populate divs with info
+                const urlOnetCode = "https://api.careeronestop.org/v1/lmi/JSoak5q9cSjVtxE/" + occupationOnetCode + location
+        
+                $.ajax({
+                    url: urlOnetCode,
+                    method: "GET",
+                    headers: {
+                        // OUR API TOKEN
+                        Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
+                        Accept: "application/json"
+                    }
+                }).then(response => {
+                    console.log(JSON.stringify(response));
+        
+                });
+
+
+
+                const urlProgramsbyOccpation = "https://api.careeronestop.org/v1/lmi/JSoak5q9cSjVtxE" + occupationOnetCode + location + "/50/0/0/0/0/0/0/0/0/5"
+
+                $.ajax({
+                    url: urlProgramsbyOccpation,
+                    method: "GET",
+                    headers: {
+                        // OUR API TOKEN
+                        Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
+                        Accept: "application/json"
+                    }
+                }).then(response => {
+                    console.log(JSON.stringify(response));
+        
+                });
+
+                 //Populate divs with info
                 //Title
                 var occupationTitle = response.OccupationList[i].OnetTitle;
                 console.log(occupationTitle);
@@ -92,7 +142,39 @@ $(document).ready(function () {
                 occupationDiv.append(occupationTitleDiv);
                 occupationDiv.append(occupationCardBody);
                 $("#occupation-div").append(occupationDiv);
-            }
+                
+
+            } //End of for Loop
+
+            //ajax call for School by Location
+
+                /*
+                sorted search school by name
+                ------------------------------------------------------
+                https://api.data.gov/ed/collegescorecard/v1/schools?api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe&school.name=University%20of%20Texas
+
+                sorted search by "best" school by location (state)
+                ------------------------------------------------------
+                https://api.data.gov/ed/collegescorecard/v1/schools/?sort=2013.earnings.6_yrs_after_entry.percent_greater_than_25000%3Adesc&school.operating=1&2015.student.size__range=1..&2015.academics.program_available.assoc_or_bachelors=true&school.state=TX&    &school.degrees_awarded.predominant__range=1..3&school.degrees_awarded.highest__range=2..4&fields=id%2Cschool.name%2Cschool.city%2Cschool.state%2C2015.student.size%2Cschool.branches%2Cschool.ownership%2Cschool.degrees_awarded.predominant%2C2015.cost.avg_net_price.overall%2C2015.completion.rate_suppressed.overall%2C2013.earnings.10_yrs_after_entry.median%2C2013.earnings.6_yrs_after_entry.percent_greater_than_25000%2Cschool.under_investigation&api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe
+
+                sorted search by BA and by degree type and location (state)
+                -------------------------------------------------------
+                https://api.data.gov/ed/collegescorecard/v1/schools/?sort=2013.earnings.6_yrs_after_entry.percent_greater_than_25000%3Adesc&school.operating=1&2015.student.size__range=1..&2015.academics.program_available.bachelors=true&2015.academics.program.degree.education__range=1..&school.state=TX&school.degrees_awarded.predominant__range=1..3&school.degrees_awarded.highest__range=2..4&fields=id%2Cschool.name%2Cschool.city%2Cschool.state%2C2015.student.size%2Cschool.branches%2Cschool.ownership%2Cschool.degrees_awarded.predominant%2C2015.cost.avg_net_price.overall%2C2015.completion.rate_suppressed.overall%2C2013.earnings.10_yrs_after_entry.median%2C2013.earnings.6_yrs_after_entry.percent_greater_than_25000%2Cschool.under_investigation&api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe
+
+                */
+                
+                // Data.gov ajax
+                const urlDataGov = "https://api.data.gov/ed/collegescorecard/v1/schools/?sort=2013.earnings.6_yrs_after_entry.percent_greater_than_25000%3Adesc&school.operating=1&2015.student.size__range=1..&2015.academics.program_available.assoc_or_bachelors=true&school.state=" + schoolState + dataGovAPIKey;
+
+                $.ajax({
+                    url: urlDataGov,
+                    method: "GET"
+                }).then(response => {
+                    console.log(response);
+                });
+
+               
+            });
         });
     });
 
@@ -206,4 +288,4 @@ $(document).ready(function () {
     //     console.log(JSON.stringify(response));
     // });
 
-});
+
