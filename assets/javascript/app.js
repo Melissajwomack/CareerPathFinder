@@ -40,11 +40,6 @@ $(document).ready(function () {
 
     var term;
 
-    $(".career-options").on("change", function () {
-        term = $(this).val();
-        console.log(term);
-    });
-
     $("#state").on("change", function () {
         location = $(this).val();
         schoolState = location;
@@ -55,6 +50,12 @@ $(document).ready(function () {
     //when submit button is pushed
     $(document).on("click", "#submitBtn", function (event) {
         console.log("button clicked");
+
+        //Empty divs for last search
+        $("#occupation-div").empty();
+
+        //User input for career field
+        term = $("#careerInput").val().trim();
 
         // Job title and job description
         // Getting ONetCode for other calls
@@ -140,8 +141,6 @@ $(document).ready(function () {
                 }).then(response => {
                     console.log(response);
                 });
-
-               
             });
         });
 
@@ -149,6 +148,11 @@ $(document).ready(function () {
 
     //When occupation is chosen
     $(document).on("click", ".occupation-title", function () {
+
+        //Empty divs when new occupation is clicked
+        $("#salary").empty();
+        $("#edReqs").empty();
+        $("#colleges-div").empty();
 
         console.log($(this).attr("value"));
 
@@ -196,6 +200,8 @@ $(document).ready(function () {
 
             for (var i = 0; i < response.SchoolPrograms.length; i++) {
 
+                console.log(response.SchoolPrograms[i]);
+
                 //Add card for each school
 
                 //Card
@@ -227,6 +233,7 @@ $(document).ready(function () {
                     "<br>" +
                     "Program Name: " + response.SchoolPrograms[i].ProgramName
                 );
+
                 console.log(response.SchoolPrograms[i].City);
                 console.log(response.SchoolPrograms[i].StateName);
                 console.log(response.SchoolPrograms[i].ProgramName);
