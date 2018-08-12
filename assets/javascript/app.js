@@ -51,6 +51,7 @@ $(document).ready(function () {
     $(document).on("click", "#submitBtn", function (event) {
         console.log("button clicked");
 
+
         //Empty divs for last search
         $("#occupation-div").empty();
 
@@ -95,6 +96,8 @@ $(document).ready(function () {
                 //Assign title with O*Net ID for use with other ajax calls
                 occupationTitleDiv.attr("value", occupationOnetCode);
 
+                
+
                  //Populate divs with info
                 //Title
                 var occupationTitle = response.OccupationList[i].OnetTitle;
@@ -111,9 +114,18 @@ $(document).ready(function () {
                 occupationDiv.append(occupationTitleDiv);
                 occupationDiv.append(occupationCardBody);
                 $("#occupation-div").append(occupationDiv);
+
                 
 
             } //End of for Loop
+
+               
+            });
+        });
+
+    $(document).on("click", "#school-title", function(){
+        console.log($(this).text());
+        var schoolChosen = $(this).text();
 
             //ajax call for School by Location
 
@@ -133,16 +145,43 @@ $(document).ready(function () {
                 */
                 
                 // Data.gov ajax
-                const urlDataGov = "https://api.data.gov/ed/collegescorecard/v1/schools/?sort=2013.earnings.6_yrs_after_entry.percent_greater_than_25000%3Adesc&school.operating=1&2015.student.size__range=1..&2015.academics.program_available.assoc_or_bachelors=true&school.state=" + schoolState + dataGovAPIKey;
+                // const urlDataGov = "https://api.data.gov/ed/collegescorecard/v1/schools/?sort=2013.earnings.6_yrs_after_entry.percent_greater_than_25000%3Adesc&school.operating=1&2015.student.size__range=1..&2015.academics.program_available.assoc_or_bachelors=true&school.state=" + schoolState + dataGovAPIKey;
+
+               
+
+                // const urlDataGov = "https://api.data.gov/ed/collegescorecard/v1/schools/?sort=2013.earnings.6_yrs_after_entry.percent_greater_than_25000%3Adesc&school.operating=1&2015.student.size__range=1..&2015.academics.program_available.assoc_or_bachelors=true&2015.academics.program.degree." + "Physician%20Assistant" + "__range=1..&school.name=" + "University of the Cumberlands" + dataGovAPIKey;
+
+                const urlDataGov = "https://api.data.gov/ed/collegescorecard/v1/schools?" + dataGovAPIKey + "&school.name=" + schoolChosen;
 
                 $.ajax({
                     url: urlDataGov,
                     method: "GET"
                 }).then(response => {
                     console.log(response);
+                    var mostCurrent = 2015;
+                    var results = response.results;
+                    var schoolNameSearch = results[0].school.name;
+                    //Admission Rate
+                    var admissionRate = results[00].admissions.admission_rate.overall;
+                    //ACT Scores average
+                    var actMidpoint = results[00].admissions.act_scores.midpoint.cumulative;
+                    //SAT Scores average
+                    var satMidpoint = results[00].admissions.sat_scores.average.overall;
+                    //Tuition (in and out of state)
+                    var tuitionInState = results[00].tuition.in_state;
+                    var tuitionOutState = results[00].tuition.out_of_state;
+                    console.log(schoolNameSearch + " " + admissionRate + " " + actMidpoint + " " + satMidpoint + " " + tuitionInState + " " + tuitionOutState);
+                    
+                    
+                    
+                    
+                    
+
                 });
-            });
-        });
+
+
+               
+            }); //End of Onclick School Title
 
 
 
@@ -210,6 +249,7 @@ $(document).ready(function () {
                 //Title
                 var schoolTitleDiv = $("<h6>").attr("class", "card-header text-center bg-light");
                 schoolTitleDiv.attr("style", "color:darkslategray");
+                schoolTitleDiv.attr("id", "school-title");
 
                 //Card body
                 var schoolCardBody = $("<div>").attr("class", "card-body");
@@ -248,7 +288,7 @@ $(document).ready(function () {
 
     });
 
-});
+}); //End of document.ready
 
 
 
