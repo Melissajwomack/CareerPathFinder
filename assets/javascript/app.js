@@ -40,10 +40,6 @@ $(document).ready(function () {
 
     var term;
 
-    $(".career-options").on("change", function () {
-        term = $(this).val();
-        console.log(term);
-    });
 
     $("#state").on("change", function () {
         location = $(this).val();
@@ -55,6 +51,9 @@ $(document).ready(function () {
     //when submit button is pushed
     $(document).on("click", "#submitBtn", function (event) {
         console.log("button clicked");
+
+        $("occupation-div").empty();
+        term = $("#careerInput").val().trim();
 
         // Job title and job description
         // Getting ONetCode for other calls
@@ -120,6 +119,7 @@ $(document).ready(function () {
                
             });
         });
+
     $(document).on("click", "#school-title", function(){
         console.log($(this).text());
         var schoolChosen = $(this).text();
@@ -157,7 +157,7 @@ $(document).ready(function () {
                     console.log(response);
                     var mostCurrent = 2015;
                     var results = response.results;
-                    var schoolName = results[0].school.name;
+                    var schoolNameSearch = results[0].school.name;
                     //Admission Rate
                     var admissionRate = results[00].admissions.admission_rate.overall;
                     //ACT Scores average
@@ -167,7 +167,7 @@ $(document).ready(function () {
                     //Tuition (in and out of state)
                     var tuitionInState = results[00].tuition.in_state;
                     var tuitionOutState = results[00].tuition.out_of_state;
-                    console.log(schoolName + " " + admissionRate + " " + actMidpoint + " " + satMidpoint + " " + tuitionInState + " " + tuitionOutState);
+                    console.log(schoolNameSearch + " " + admissionRate + " " + actMidpoint + " " + satMidpoint + " " + tuitionInState + " " + tuitionOutState);
                     
                     
                     
@@ -177,7 +177,7 @@ $(document).ready(function () {
                 });
 
                
-            });
+            }); //End of Onclick School Title
 
 
     //When occupation is chosen
@@ -275,7 +275,7 @@ $(document).ready(function () {
 
     });
 
-});
+}); //End of document.ready
 
 
 
