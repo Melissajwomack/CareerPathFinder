@@ -12,10 +12,16 @@
   api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe
     You can start using this key to make web service requests. Simply pass your key in the URL when making a web request. Here's an example:
 
+    https://api.data.gov/ed/collegescorecard/v1/schools?api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe&school.name=University%20of%20Texas
+
     https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe&location=Denver+CO
   
   */
  $(document).ready(function () {
+
+    var dataGovAPIKey = "api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe";
+
+    var schoolName = "University of Texas";
 
     var occupationOnetCode;
 
@@ -82,6 +88,8 @@
         
                 });
 
+
+
                 const urlProgramsbyOccpation = "https://api.careeronestop.org/v1/lmi/JSoak5q9cSjVtxE" + occupationOnetCode + location + "/50/0/0/0/0/0/0/0/0/5"
 
                 $.ajax({
@@ -96,14 +104,17 @@
                     console.log(JSON.stringify(response));
         
                 });
+                
+                //https://api.data.gov/ed/collegescorecard/v1/schools?api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe&school.name=University%20of%20Texas
+                
                 // Data.gov ajax
-                const urlDataGov = "";
+                const urlDataGov = "https://api.data.gov/ed/collegescorecard/v1/schools?" + dataGovAPIKey + "&school.name=" + schoolName;
 
                 $.ajax({
                     url: urlDataGov,
                     method: "GET"
                 }).then(response => {
-                    console.log(JSON.stringify(response));
+                    console.log(response);
                 });
         }
     });
