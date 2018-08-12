@@ -75,7 +75,7 @@ $(document).ready(function () {
                 //Add card for each occupation in html
 
                 //Card
-                var occupationDiv = $("<div>").attr("class", "card bg-light");
+                var occupationDiv = $("<div>").attr("class", "card bg-light mb-3");
 
                 //Title
                 var occupationTitleDiv = $("<h6>").attr("class", "card-header text-center bg-light occupation-title");
@@ -95,7 +95,8 @@ $(document).ready(function () {
                 occupationTitleDiv.attr("value", occupationOnetCode);
 
                 
-                //Populate divs with info
+
+                 //Populate divs with info
                 //Title
                 var occupationTitle = response.OccupationList[i].OnetTitle;
                 console.log(occupationTitle);
@@ -175,9 +176,8 @@ $(document).ready(function () {
 
                 });
 
-
-
-    });
+               
+            });
 
 
     //When occupation is chosen
@@ -204,7 +204,7 @@ $(document).ready(function () {
             //Populate salary info
             $("#salary").html("Average pay in " + location + ": " + response.LMI.AveragePayState +
             "<br>" +
-            "National average pay: " + response.LMI.AveragePayState);
+            "National average pay: " + response.LMI.AveragePayNational);
             console.log(response.LMI.AveragePayState);
             console.log(response.LMI.AveragePayNational);
 
@@ -232,7 +232,7 @@ $(document).ready(function () {
                 //Add card for each school
 
                 //Card
-                var schoolDiv = $("<div>").attr("class", "card bg-light mt-2");
+                var schoolDiv = $("<div>").attr("class", "card bg-light mb-3");
 
                 //Title
                 var schoolTitleDiv = $("<h6>").attr("class", "card-header text-center bg-light");
@@ -269,14 +269,13 @@ $(document).ready(function () {
                 schoolCardBody.append(schoolInfoDiv);
                 schoolDiv.append(schoolTitleDiv);
                 schoolDiv.append(schoolCardBody);
-                $(".colleges-div").append(schoolDiv);
+                $("#colleges-div").append(schoolDiv);
             }
         });
 
     });
 
 });
-
 
 
 

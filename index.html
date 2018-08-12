@@ -7,7 +7,8 @@
     <!-- CSS reset -->
     <!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
     <!-- jQuery Library -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
@@ -16,8 +17,7 @@
         crossorigin="anonymous"></script> -->
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
@@ -28,7 +28,7 @@
     <title>Career Path Finder</title>
 </head>
 <header>
-<body class="bg-dark">
+     <body class="bg-dark">
         <div class="row">
             <div class="col-sm-12 text-center">
                 <img src="assets/images/logo1.png" width="30" height="30" class="align-middle mt-2" alt="">
@@ -42,7 +42,7 @@
 </header>
 <div class="accordion mt-3 ml-4 mr-4 rounded" id="accordionExample">
     <!-- select a career field (values pre-determined) -->
-    <div class="card rounded">
+    <div class="card rounded ml-4 mr-4">
         <div class="card-header bg-dark text-center" id="headingOne">
             <button class="btn btn-link mb-0" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 <h5 class="mb-0 text-capitalize text-light">Get Started Here</h5>
@@ -52,69 +52,31 @@
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body bg-light">
                 <div class="row">
-                    <div class="col-sm-12 text-center mb-4">
-                        <h6 class="mb-0 text-capitalize text-primary">Select ONE career from a career field below
-                        </h6>
+                    <div class="col-sm-12 text-center">
+                        <i class="fas fa-user-md"></i>
+                        <i class="fas fa-flask"></i>
+                        <i class="fas fa-laptop"></i>
                     </div>
                 </div>
                 <div class="row pl-1 pr-1">
-                    <div class="col-md-3 d-inline-block text-center">
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">
-                                <div></div>
-                                <i class="fas fa-user-md"></i>
-                            </label>
-                            <select class="form-control career-options medicalCareers">
-                                <option value="">Browse Medical Careers:</option>
-                                <option class="search-term" value="Physician Assistants">Physician Assistants</option>
-                                <option class="search-term" value="Nurse Practitioners">Nurse Practitioners</option>
-                                <option class="search-term" value="Physical Therapist ">Physical Therapist Assistants</option>
-                                <option class="search-term" value="Internists, General">Internists, General</option>
-                                <option class="search-term" value="Pharmacy Technicians">Pharmacy Technicians</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md d-inline-block text-center">
-                        <h6>- OR -</h6>
-                    </div>
-                    <div class="col-md-3 d-inline-block text-center">
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">
-                                <i class="fas fa-flask"></i>
-                            </label>
-                            <select class="form-control career-options medicalCareers">
-                                <option value="">Browse Science Careers:</option>
-                                <option class="search-term" value="Biologists">Biologists</option>
-                                <option class="search-term" value="Environmental Scientists and Specialists, Including Health">Environmental Scientists and Specialists, Including Health</option>
-                                <option class="search-term" value="Political Scientist">Political Scientist</option>
-                                <option class="search-term" value="Molecular and Cellular Biologists">Molecular and Cellular Biologists</option>
-                                <option class="search-term" value="Medical and Clinical Laboratory Technologists">Medical and Clinical Laboratory Technologists</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md d-inline-block text-center">
-                        <h6>- OR -</h6>
-                    </div>
-                    <div class="col-md-3 d-inline-block text-center">
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">
-                                <i class="fas fa-laptop"></i>
-                            </label>
-                            <select class="form-control career-options medicalCareers">
-                                <option value="">Browse Tech Careers:</option>
-                                <option class="search-term" value="Software Developers, Applications">Software Developers, Applications</option>
-                                <option class="search-term" value="Software Quality Assurance Engineers and Tester">Software Quality Assurance Engineers and Testers</option>
-                                <option class="search-term" value="Web Developers">Web Developers</option>
-                                <option class="search-term" value="Database Architects">Database Architects</option>
-                                <option class="search-term" value="Computer Programmers">Computer Programmers</option>
-                            </select>
-                        </div>
+                    <div class="col-sm-12 d-inline-block text-center">
+                        <h6 class="mb-0 text-capitalize text-primary">Enter any job title in the field below
+                        </h6>
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-sm-4">
+                    </div>
+                    <div class="col-sm-4 text-center mt-2 mb-4">
+                        <textarea class="form-control" id="careerInput" rows="1"></textarea>
+                    </div>
+                    <div class="col-sm-4">
+                    </div>
+                </div>
+                 <div class="row">
                     <div class="col-sm-12 text-center mt-2 mb-4">
                         <h6 class="mb-0 text-capitalize text-primary">Select a State
-                         </h6>
+                        </h6>
                     </div>
                 </div>
                 <div class="row">
@@ -181,138 +143,118 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <button id="submitBtn">Search</button>
-                        </div>
+                </div>
+                <div class="row ">
+                    <div class="col-md-12 text-center">
+                        <button id="submitBtn">Search</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-<div class="row mt-3">
-    <div class="col-sm-12">
-        <div class="card ml-4 mr-4">
-            <div class="card-header bg-dark  text-center" id="headingTwo">
-                <button class="btn btn-link mb-0" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <h5 class="mb-0 text-capitalize text-light">Job Title/Descriptions</h5>
-                    <i class="fas fa-chevron-circle-down mb-0 text-light"></i>
-                </button>
-            </div>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                <div class="card-body main" id="occupation-div">
-                    <!-- Insert Content Here -->
-                    <!-- <div class="card bg-light">
+    <div class="row mt-3">
+        <div class="col-sm-12">
+            <div class="card ml-4 mr-4">
+                <div class="card-header bg-dark  text-center" id="headingTwo">
+                    <button class="btn btn-link mb-0" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <h5 class="mb-0 text-capitalize text-light">Job Title/Descriptions</h5>
+                        <i class="fas fa-chevron-circle-down mb-0 text-light"></i>
+                    </button>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body main" id="occupation-div">
+                        <div class="row pl-1 pr-1">
+                            <div class="col-sm-12 d-inline-block text-center">
+                                <h6 class="mb-0 text-capitalize text-primary">Click on any career title below to learn more!
+                                </h6>
+                            </div>
+                        </div>
+                            <!-- Insert Content Here -->
+                            <!-- <div class="card bg-light">
                         <h6 class="card-header text-center bg-light" style="color:darkslategray">Title/Description</h6>
                         <div class="card-body" style="padding:0px">
                             <p class="card-text"></p>
                             <a href="#" class="btn text-capitalize pt-0 pb-0 pr-2 pl-2" style="color:darkslategray!important">Test</a>
                         </div>
                     </div> -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="row mt-3">
-    <div class="col-sm-12">
-        <div class="card ml-4 mr-4">
-            <div class="card-header bg-dark  text-center" id="headingTwo">
-                <button class="btn btn-link mb-0" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <h5 class="mb-0 text-capitalize text-light">Salary Info, Career Prospects, Education Requirements</h5>
-                    <i class="fas fa-chevron-circle-down mb-0 text-light"></i>
-                </button>
-            </div>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                <div class="card-body">
-                    <!-- Insert Content Here -->
-                    <div class="card bg-light">
-                        <h6 class="card-header text-center bg-light" style="color:darkslategray">Salary Info</h6>
-                        <div class="card-body" style="padding:0px">
-                            <p class="card-text" id="salary"></p>
-                            <!-- <a href="#" class="btn text-capitalize pt-0 pb-0 pr-2 pl-2" style="color:darkslategray!important">Test</a> -->
-                        </div>
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <div class="card ml-4 mr-4">
+                    <div class="card-header bg-dark  text-center" id="headingThree">
+                        <button class="btn btn-link mb-0" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true"
+                            aria-controls="collapseThree">
+                            <h5 class="mb-0 text-capitalize text-light">Salary Info, Career Prospects, Education Requirements</h5>
+                            <i class="fas fa-chevron-circle-down mb-0 text-light"></i>
+                        </button>
                     </div>
-                    <!-- <div class="card bg-light mt-2">
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <!-- Insert Content Here -->
+                            <div class="card bg-light">
+                                <h6 class="card-header text-center bg-light" style="color:darkslategray">Salary Info</h6>
+                                <div class="card-body" style="padding:0px">
+                                    <p class="card-text" id="salary"></p>
+                                    <!-- <a href="#" class="btn text-capitalize pt-0 pb-0 pr-2 pl-2" style="color:darkslategray!important">Test</a> -->
+                                </div>
+                            </div>
+                            <!-- <div class="card bg-light mt-2">
                         <h6 class="card-header text-center bg-light" style="color:darkslategray">Career Prospects</h6>
                         <div class="card-body" style="padding:0px">
                             <p class="card-text" id=prospects></p>
                             <a href="#" class="btn text-capitalize pt-0 pb-0 pr-2 pl-2" style="color:darkslategray!important">Test</a>
                         </div>
                     </div> -->
-                    <div class="card bg-light mt-2">
-                        <h6 class="card-header text-center bg-light" style="color:darkslategray">Education Requirements</h6>
-                        <div class="card-body" style="padding:0px">
-                            <p class="card-text" id="edReqs"></p>
-                            <!-- <a href="#" class="btn text-capitalize pt-0 pb-0 pr-2 pl-2" style="color:darkslategray!important">Test</a> -->
+                            <div class="card bg-light mt-2">
+                                <h6 class="card-header text-center bg-light" style="color:darkslategray">Education Requirements</h6>
+                                <div class="card-body" style="padding:0px">
+                                    <p class="card-text" id="edReqs"></p>
+                                    <!-- <a href="#" class="btn text-capitalize pt-0 pb-0 pr-2 pl-2" style="color:darkslategray!important">Test</a> -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="row mt-3">
-    <div class="col-sm-12">
-        <div class="card ml-4 mr-4">
-            <div class="card-header bg-dark  text-center" id="headingThree">
-                <button class="btn btn-link mb-0" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true"
-                    aria-controls="collapseThree">
-                    <h5 class="mb-0 text-capitalize text-light">What AP Courses Should I Choose? </h5>
-                    <i class="fas fa-chevron-circle-down mb-0 text-light"></i>
-                </button>
-            </div>
-        </div>
-        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-            <div class="card-body">
-                <!-- Insert Content Here -->
-                <div class="card bg-light">
-                    <h6 class="card-header text-center bg-light" style="color:darkslategray">Recommended AP Courses</h6>
-                    <div class="card-body" style="padding:0px">
-                        <p class="card-text" id="apCourses"></p>
-                        <!-- <a href="#" class="btn text-capitalize pt-0 pb-0 pr-2 pl-2" style="color:darkslategray!important">Test</a> -->
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <div class="card ml-4 mr-4">
+                    <div class="card-header bg-dark  text-center" id="headingFour">
+                        <button class="btn btn-link mb-0" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                            <h5 class="mb-0 text-capitalize text-light">What Universities Should I Choose?</h5>
+                            <i class="fas fa-chevron-circle-down mb-0 text-light"></i>
+                        </button>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row mt-3">
-    <div class="col-sm-12">
-        <div class="card ml-4 mr-4">
-            <div class="card-header bg-dark  text-center" id="headingFour">
-                <button class="btn btn-link mb-0" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                    <h5 class="mb-0 text-capitalize text-light">What Universities/Vocational Programs Should I Choose? </h5>
-                    <i class="fas fa-chevron-circle-down mb-0 text-light"></i>
-                </button>
-            </div>
-        </div>
-        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-            <div class="card-body colleges-div">
-                <!-- Insert Content Here -->
-                <!-- <div class="card bg-light mt-2">
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="card-body colleges-div">
+                        <!-- Insert Content Here -->
+                        <!-- <div class="card bg-light mt-2">
                     <h6 class="card-header text-center bg-light" style="color:darkslategray">Colleges and Universities</h6>
                     <div class="card-body" style="padding:0px">
                         <p class="card-text" id=colleges></p>
                         <!-- <a href="#" class="btn text-capitalize pt-0 pb-0 pr-2 pl-2" style="color:darkslategray!important">Test</a> -->
-                    <!-- </div>
+                        <!-- </div>
                 </div>  -->
-                <!-- <div class="card bg-light mt-2">
+                        <!-- <div class="card bg-light mt-2">
                     <h6 class="card-header text-center bg-light" style="color:darkslategray">Vocational Programs</h6>
                     <div class="card-body" style="padding:0px">
                         <p class="card-text" id="vocPrograms"></p>
                         <a href="#" class="btn text-capitalize pt-0 pb-0 pr-2 pl-2" style="color:darkslategray!important">Test</a>
                     </div>
                 </div> -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
- <!-- javascript  -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="assets/javascript/app.js"></script>
- </body>
- </html>
+    <!-- javascript  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/javascript/app.js"></script>
+    </body>
+ </html> 
