@@ -40,7 +40,6 @@ $(document).ready(function () {
 
     var term;
 
-
     $("#state").on("change", function () {
         location = $(this).val();
         schoolState = location;
@@ -52,7 +51,11 @@ $(document).ready(function () {
     $(document).on("click", "#submitBtn", function (event) {
         console.log("button clicked");
 
-        $("occupation-div").empty();
+
+        //Empty divs for last search
+        $("#occupation-div").empty();
+
+        //User input for career field
         term = $("#careerInput").val().trim();
 
         // Job title and job description
@@ -176,12 +179,19 @@ $(document).ready(function () {
 
                 });
 
+
                
             }); //End of Onclick School Title
 
 
+
     //When occupation is chosen
     $(document).on("click", ".occupation-title", function () {
+
+        //Empty divs when new occupation is clicked
+        $("#salary").empty();
+        $("#edReqs").empty();
+        $("#colleges-div").empty();
 
         console.log($(this).attr("value"));
 
@@ -229,6 +239,8 @@ $(document).ready(function () {
 
             for (var i = 0; i < response.SchoolPrograms.length; i++) {
 
+                console.log(response.SchoolPrograms[i]);
+
                 //Add card for each school
 
                 //Card
@@ -261,6 +273,7 @@ $(document).ready(function () {
                     "<br>" +
                     "Program Name: " + response.SchoolPrograms[i].ProgramName
                 );
+
                 console.log(response.SchoolPrograms[i].City);
                 console.log(response.SchoolPrograms[i].StateName);
                 console.log(response.SchoolPrograms[i].ProgramName);
