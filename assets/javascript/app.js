@@ -126,96 +126,75 @@ $(document).ready(function () {
         });
 
     $(document).on("click", "#school-title", function(){
-        console.log($(this).text());
-        var schoolNameSearch = "";
-        var schoolChosen = $(this).text();
+        // console.log($(this).text());
+        // var schoolNameSearch = "";
+        // var schoolChosen = $(this).text();
 
-            //ajax call for School by Location
+            // //ajax call for School by Location
 
-                /*
-                sorted search school by name
-                ------------------------------------------------------
-                https://api.data.gov/ed/collegescorecard/v1/schools?api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe&school.name=University%20of%20Texas
+            // // if(!schoolClicked){
+            // //     schoolClicked = true;
+            //     const urlDataGov = "https://api.data.gov/ed/collegescorecard/v1/schools?" + dataGovAPIKey + "&school.name=" + schoolChosen;
 
-                sorted search by "best" school by location (state)
-                ------------------------------------------------------
-                https://api.data.gov/ed/collegescorecard/v1/schools/?sort=2013.earnings.6_yrs_after_entry.percent_greater_than_25000%3Adesc&school.operating=1&2015.student.size__range=1..&2015.academics.program_available.assoc_or_bachelors=true&school.state=TX&    &school.degrees_awarded.predominant__range=1..3&school.degrees_awarded.highest__range=2..4&fields=id%2Cschool.name%2Cschool.city%2Cschool.state%2C2015.student.size%2Cschool.branches%2Cschool.ownership%2Cschool.degrees_awarded.predominant%2C2015.cost.avg_net_price.overall%2C2015.completion.rate_suppressed.overall%2C2013.earnings.10_yrs_after_entry.median%2C2013.earnings.6_yrs_after_entry.percent_greater_than_25000%2Cschool.under_investigation&api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe
+            //     $.ajax({
+            //         url: urlDataGov,
+            //         method: "GET"
+            //     }).then(response => {
+            //         // console.log(response);
 
-                sorted search by BA and by degree type and location (state)
-                -------------------------------------------------------
-                https://api.data.gov/ed/collegescorecard/v1/schools/?sort=2013.earnings.6_yrs_after_entry.percent_greater_than_25000%3Adesc&school.operating=1&2015.student.size__range=1..&2015.academics.program_available.bachelors=true&2015.academics.program.degree.education__range=1..&school.state=TX&school.degrees_awarded.predominant__range=1..3&school.degrees_awarded.highest__range=2..4&fields=id%2Cschool.name%2Cschool.city%2Cschool.state%2C2015.student.size%2Cschool.branches%2Cschool.ownership%2Cschool.degrees_awarded.predominant%2C2015.cost.avg_net_price.overall%2C2015.completion.rate_suppressed.overall%2C2013.earnings.10_yrs_after_entry.median%2C2013.earnings.6_yrs_after_entry.percent_greater_than_25000%2Cschool.under_investigation&api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe
-
-                */
-                
-                // Data.gov ajax
-                // const urlDataGov = "https://api.data.gov/ed/collegescorecard/v1/schools/?sort=2013.earnings.6_yrs_after_entry.percent_greater_than_25000%3Adesc&school.operating=1&2015.student.size__range=1..&2015.academics.program_available.assoc_or_bachelors=true&school.state=" + schoolState + dataGovAPIKey;
-
-               
-
-                // const urlDataGov = "https://api.data.gov/ed/collegescorecard/v1/schools/?sort=2013.earnings.6_yrs_after_entry.percent_greater_than_25000%3Adesc&school.operating=1&2015.student.size__range=1..&2015.academics.program_available.assoc_or_bachelors=true&2015.academics.program.degree." + "Physician%20Assistant" + "__range=1..&school.name=" + "University of the Cumberlands" + dataGovAPIKey;
-            // if(!schoolClicked){
-                schoolClicked = true;
-                const urlDataGov = "https://api.data.gov/ed/collegescorecard/v1/schools?" + dataGovAPIKey + "&school.name=" + schoolChosen;
-
-                $.ajax({
-                    url: urlDataGov,
-                    method: "GET"
-                }).then(response => {
-                    // console.log(response);
-
-                    var results = response.results;
-                    schoolNameSearch = results[0].school.name;
-                    //Admission Rate
-                    var admissionRate = results[0][2015].admissions.admission_rate.overall;
-                    // ACT Scores average
-                    var actMidpoint = results[0][2015].admissions.act_scores.midpoint.cumulative;
-                    //SAT Scores average
-                    var satMidpoint = results[0][2015].admissions.sat_scores.average.overall;
-                    //Tuition (in and out of state)
-                    var tuitionInState = results[0][2015].cost.tuition.in_state;
-                    var tuitionOutState = results[0][2015].cost.tuition.out_of_state;
-                    // console.log(schoolNameSearch + " " + admissionRate + " " + actMidpoint + " " + satMidpoint + " " + tuitionInState + " " + tuitionOutState);
+            //         var results = response.results;
+            //         schoolNameSearch = results[0].school.name;
+            //         //Admission Rate
+            //         var admissionRate = results[0][2015].admissions.admission_rate.overall;
+            //         // ACT Scores average
+            //         var actMidpoint = results[0][2015].admissions.act_scores.midpoint.cumulative;
+            //         //SAT Scores average
+            //         var satMidpoint = results[0][2015].admissions.sat_scores.average.overall;
+            //         //Tuition (in and out of state)
+            //         var tuitionInState = results[0][2015].cost.tuition.in_state;
+            //         var tuitionOutState = results[0][2015].cost.tuition.out_of_state;
+            //         // console.log(schoolNameSearch + " " + admissionRate + " " + actMidpoint + " " + satMidpoint + " " + tuitionInState + " " + tuitionOutState);
                     
-                    //Add Card for School Info
+            //         //Add Card for School Info
                     
-                    //Card
-                    var infoDiv = $("<div>").attr("class", "card bg-light mb-3");
-                    infoDiv.attr("id", "school-details");
-                    // $("#school-details").attr("style", "display: inline-block;");
+            //         //Card
+            //         var infoDiv = $("<div>").attr("class", "card bg-light mb-3");
+            //         infoDiv.attr("id", "school-details");
+            //         // $("#school-details").attr("style", "display: inline-block;");
 
-                    //Card Body
-                    var infoCardBody = $("<div>").attr("class", "card-body");
-                    infoCardBody.attr("style", "padding:0px");
+            //         //Card Body
+            //         var infoCardBody = $("<div>").attr("class", "card-body");
+            //         infoCardBody.attr("style", "padding:0px");
 
-                    //School info
-                    var schoolInfoDiv = $("<p>").attr("class", "card-text");
-                    schoolInfoDiv.attr("id", "schoolInfo");
+            //         //School info
+            //         var schoolInfoDiv = $("<p>").attr("class", "card-text");
+            //         schoolInfoDiv.attr("id", "schoolInfo");
 
-                    infoDiv.html(
-                        "Admission Rate: " + checkNullandNum(admissionRate) + "<br>" +
-                        "Cumulative ACT Score: " + checkNull(actMidpoint) + "<br>" +
-                        "Overal SAT Score: " + checkNull(satMidpoint) + "<br>" +
-                        "In-State Tuition: " + checkNullandNum(tuitionInState) + "<br>" +
-                        "Out-of-State Tuition: " + checkNullandNum(tuitionOutState)
-                    );
+            //         infoDiv.html(
+            //             "Admission Rate: " + checkNullandNum(admissionRate) + "<br>" +
+            //             "Cumulative ACT Score: " + checkNull(actMidpoint) + "<br>" +
+            //             "Overal SAT Score: " + checkNull(satMidpoint) + "<br>" +
+            //             "In-State Tuition: " + checkNullandNum(tuitionInState) + "<br>" +
+            //             "Out-of-State Tuition: " + checkNullandNum(tuitionOutState)
+            //         );
 
-                 //Need to put on the appropriate school clicked >_<
-                 //Number of School Entries ==> i
+            //      //Need to put on the appropriate school clicked >_<
+            //      //Number of School Entries ==> i
            
 
-                    //Append divs to main dropdown
-                    infoCardBody.append(schoolInfoDiv);
-                    infoDiv.append(infoCardBody);
-                    var collegeBox = $("#collegeInfo");
-                    $(this).append(infoDiv);
+            //         //Append divs to main dropdown
+            //         infoCardBody.append(schoolInfoDiv);
+            //         infoDiv.append(infoCardBody);
+            //         var collegeBox = $("#collegeInfo");
+            //         $(this).append(infoDiv);
                    
                  
-                });
-            // }else {
-            //     schoolClicked = false;
-            //     console.log("unclicked");
-            //     $("#school-details").attr("style", "display: hidden;");
-            // }
+            //     });
+            // // }else {
+            // //     schoolClicked = false;
+            // //     console.log("unclicked");
+            // //     $(this).remove();
+            // // }
 
                
             }); //End of Onclick School Title
@@ -247,11 +226,16 @@ $(document).ready(function () {
                 Accept: "application/json"
             }
         }).then(response => {
+            var AvgStatePay = response.LMI.AveragePayState;
+            var NtlStatePay = response.LMI.AveragePayNational;
+
+            // AvgStatePay = AvgStatePay.formatMoney(2, ".", ",");
+            // NtlStatePay = NtlStatePay.formatMoney(2, ".", ",");
 
             //Populate salary info
-            $("#salary").html("Average pay in " + location + ": " + response.LMI.AveragePayState +
+            $("#salary").html("Average pay in " + location + ": $" + AvgStatePay +
             "<br>" +
-            "National average pay: " + response.LMI.AveragePayNational);
+            "National average pay: $" + NtlStatePay);
             console.log(response.LMI.AveragePayState);
             console.log(response.LMI.AveragePayNational);
 
@@ -317,15 +301,72 @@ $(document).ready(function () {
                 console.log(response.SchoolPrograms[i].StateName);
                 console.log(response.SchoolPrograms[i].ProgramName);
 
+                //ajax call for School by Location
+                var schoolChosen = response.SchoolPrograms[i].SchoolName;
+            // if(!schoolClicked){
+            //     schoolClicked = true;
+            const urlDataGov = "https://api.data.gov/ed/collegescorecard/v1/schools?" + dataGovAPIKey + "&school.name=" + schoolChosen;
+
+            $.ajax({
+                url: urlDataGov,
+                method: "GET"
+            }).then(response => {
+                // console.log(response);
+
+                var results = response.results;
+                schoolNameSearch = results[0].school.name;
+                //Admission Rate
+                var admissionRate = results[0][2015].admissions.admission_rate.overall;
+                // ACT Scores average
+                var actMidpoint = results[0][2015].admissions.act_scores.midpoint.cumulative;
+                //SAT Scores average
+                var satMidpoint = results[0][2015].admissions.sat_scores.average.overall;
+                //Tuition (in and out of state)
+                var tuitionInState = results[0][2015].cost.tuition.in_state;
+                var tuitionOutState = results[0][2015].cost.tuition.out_of_state;
+                // console.log(schoolNameSearch + " " + admissionRate + " " + actMidpoint + " " + satMidpoint + " " + tuitionInState + " " + tuitionOutState);
+                
+                //Add Card for School Info
+                
+                //Card
+                var infoDiv = $("<p>");
+                infoDiv.attr("class", "card-text");
+                infoDiv.attr("id", "school-details");
+                // $("#school-details").attr("style", "display: inline-block;");
+
+
+                infoDiv.html(
+                    "Admission Rate: " + checkNullandNum(admissionRate) + "<br>" +
+                    "Cumulative ACT Score: " + checkNull(actMidpoint) + "<br>" +
+                    "Overal SAT Score: " + checkNull(satMidpoint) + "<br>" +
+                    "In-State Tuition: " + checkNullandNum(tuitionInState) + "<br>" +
+                    "Out-of-State Tuition: " + checkNullandNum(tuitionOutState)
+                );
+
+             //Need to put on the appropriate school clicked >_<
+             //Number of School Entries ==> i
+       
+
+                               //Datagov Populate
+                 //Append divs to main dropdown
+
+                 infoDiv.append(schoolCardBody);
+               
+             
+            });// End of Mike ajax
+
                 //Append divs to main dropdown
                 schoolCardBody.append(schoolInfoDiv);
                 schoolDiv.append(schoolTitleDiv);
                 schoolDiv.append(schoolCardBody);
                 $("#colleges-div").append(schoolDiv);
-            }
-        });
 
-    });
+
+
+            }//End of for loop
+        }); // End of Melissa ajax
+
+    }); //End of Onclick occupation title
 
 }); //End of document.ready
 
@@ -333,10 +374,10 @@ function checkNullandNum(value){
     if(value === null){
         return "Info Not Available";
     }else if(isFloat(value)){
+        value *= 100;
         return parseFloat(value).toFixed(2)+"%";
     }else if(isInt(value)){
-        value *= 100;
-        return "$" + value + ".00";
+        return "$" + value.formatMoney(2, ".", ",");
     }
     else {
         return value;
@@ -359,4 +400,15 @@ function isInt(n){
 function isFloat(n){
     return Number(n) === n && n % 1 !== 0;
 }
+
+Number.prototype.formatMoney = function(c, d, t){
+    var n = this, 
+    c = isNaN(c = Math.abs(c)) ? 2 : c, 
+    d = d == undefined ? "." : d, 
+    t = t == undefined ? "," : t, 
+    s = n < 0 ? "-" : "", 
+    i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))), 
+    j = (j = i.length) > 3 ? j % 3 : 0;
+   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+ };
 
