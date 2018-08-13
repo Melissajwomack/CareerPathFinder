@@ -157,25 +157,65 @@ $(document).ready(function () {
                     url: urlDataGov,
                     method: "GET"
                 }).then(response => {
-                    console.log(response);
-                    var mostCurrent = 2015;
+                    // console.log(response);
+
+                    var mostCurrent = "2015";
                     var results = response.results;
                     var schoolNameSearch = results[0].school.name;
                     //Admission Rate
-                    var admissionRate = results[00].admissions.admission_rate.overall;
-                    //ACT Scores average
-                    var actMidpoint = results[00].admissions.act_scores.midpoint.cumulative;
+                    var admissionRate = results[0][2015].admissions.admission_rate.overall;
+                    // ACT Scores average
+                    var actMidpoint = results[0][2015].admissions.act_scores.midpoint.cumulative;
                     //SAT Scores average
-                    var satMidpoint = results[00].admissions.sat_scores.average.overall;
+                    var satMidpoint = results[0][2015].admissions.sat_scores.average.overall;
                     //Tuition (in and out of state)
-                    var tuitionInState = results[00].tuition.in_state;
-                    var tuitionOutState = results[00].tuition.out_of_state;
+                    var tuitionInState = results[0][2015].cost.tuition.in_state;
+                    var tuitionOutState = results[0][2015].cost.tuition.out_of_state;
                     console.log(schoolNameSearch + " " + admissionRate + " " + actMidpoint + " " + satMidpoint + " " + tuitionInState + " " + tuitionOutState);
                     
+                    //Add Card for School Info
                     
-                    
-                    
-                    
+                    //Card
+                    var infoDiv = $("<div>").attr("class", "card bg-light mb-3");
+
+                    //Card Body
+                    var infoCardBody = $("<div>").attr("class", "card-body");
+                    infoCardBody.attr("style", "padding:0px");
+
+                    //School info
+                    var schoolInfoDiv = $("<p>").attr("class", "card-text");
+                    schoolInfoDiv.attr("id", "schoolInfo");
+
+                    infoDiv.html(
+                        "Admission Rate: " + checkNull(admissionRate) + "<br>" +
+                        "Cumulative ACT Score: " + checkNull(actMidpoint) + "<br>" +
+                        "Overal SAT Score: " + checkNull(satMidpoint) + "<br>" +
+                        "In-State Tuition: " + checkNull(tuitionInState) + "<br>" +
+                        "Out-of-State Tuition: " + checkNull(tuitionOutState)
+                    );
+
+                 //Need to put on the appropriate school clicked >_<
+                 //Number of School Entries ==> i
+                 
+                 
+                for(var i = 0; i < 5; i++){
+                    console.log("schoolNameSearch + i = " + schoolNameSearch + i); 
+                    var subName = $("#school-title").attr("list").trim();
+                    subName.substring(0, subName.length-2);
+                    console.log("list value = " + subName);
+                    if(subName + i === schoolNameSearch+i){
+
+                        //Append divs to main dropdown
+                        infoCardBody.append(schoolInfoDiv);
+                        infoDiv.append(infoCardBody);
+                        var collegeBox = $("#collegeInfo");
+                        collegeBox.prepend(infoDiv);
+                     }
+                     else{
+                         console.log("nope");
+                         console.log(subName+i);
+                     }
+                 }
 
                 });
 
@@ -250,9 +290,11 @@ $(document).ready(function () {
                 var schoolTitleDiv = $("<h6>").attr("class", "card-header text-center bg-light");
                 schoolTitleDiv.attr("style", "color:darkslategray");
                 schoolTitleDiv.attr("id", "school-title");
+                schoolTitleDiv.attr("list", response.SchoolPrograms[i].SchoolName+i);
 
                 //Card body
                 var schoolCardBody = $("<div>").attr("class", "card-body");
+                schoolCardBody.attr("id", "collegeInfo");
                 schoolCardBody.attr("style", "padding:0px");
 
                 //School info
@@ -271,7 +313,7 @@ $(document).ready(function () {
                     "<br>" +
                     "State: " + response.SchoolPrograms[i].StateName +
                     "<br>" +
-                    "Program Name: " + response.SchoolPrograms[i].ProgramName
+                    "Program Name: " + response.SchoolPrograms[i].ProgramName 
                 );
 
                 console.log(response.SchoolPrograms[i].City);
@@ -290,5 +332,12 @@ $(document).ready(function () {
 
 }); //End of document.ready
 
-
+function checkNull(value){
+    if(value === null){
+        return "Info Not Available";
+    }
+    else {
+        return value;
+    }
+}
 
