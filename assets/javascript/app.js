@@ -233,7 +233,9 @@
                     "<br>" +
                     "State: " + "No Information Available" +
                     "<br>" +
-                    "Program Name: " + "No Information Available" 
+                    "Program Name: " + "No Information Available" +
+                    "<br>" +
+                    "URL: " + "No Information Available"
                 );
 
 
@@ -279,11 +281,13 @@
 
                 //School info
                 schoolInfoDiv.html(
+                    "Program Name: " + response.SchoolPrograms[i].ProgramName +
+                    "<br>" +
                     "City: " + response.SchoolPrograms[i].City +
                     "<br>" +
-                    "State: " + response.SchoolPrograms[i].StateName +
-                    "<br>" +
-                    "Program Name: " + response.SchoolPrograms[i].ProgramName 
+                    "State: " + response.SchoolPrograms[i].StateName + 
+                    "<br>" + 
+                    response.SchoolPrograms[i].SchoolName + "'s Website: <a target='_blank' href='https://" + response.SchoolPrograms[i].SchoolUrl + "'>" + response.SchoolPrograms[i].SchoolUrl + "</a>"
                 );
 
 
