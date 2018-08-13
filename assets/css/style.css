@@ -1,5 +1,5 @@
 header {
-    background-image: url("../../assets/images/navbg2.jpg");
+    /* background-image: url("../../assets/images/navbg2.jpg"); */
     background-repeat: no-repeat;
     background-size: 100%;
     height: auto;
@@ -7,7 +7,7 @@ header {
     color: #fff;
 }
  body {
-    background-image: url("../../assets/images/bodybg.jpg");
+    /* background-image: url("../../assets/images/bodybg.jpg"); */
     background-repeat: no-repeat;
     background-size: 100%;
     height: auto;
