@@ -87,7 +87,7 @@
 
                 //Title
                 var occupationTitleDiv = $("<h6>").attr("class", "card-header text-center bg-light occupation-title");
-                occupationTitleDiv.attr("style", "color:blue;text-decoration:underline");
+                occupationTitleDiv.attr("style", "color:blue;");
 
                 //Card body
                 var occupationCardBody = $("<div>").attr("class", "card-body");
@@ -283,11 +283,13 @@
                 $("#colleges-div").append(schoolDiv);
 
                 mikesAjax(i);
+                //collapse after Job Title selection
+                $("#collapseTwo").removeClass("show");
+                $("#collapseThree").addClass("show");
                 
             }//End of for loop
-               //collapse after Job Title selection
-            $("#collapseTwo").removeClass("show");
-             $("#collapseThree").addClass("show");
+               
+            
         }); // End of Melissa ajax
         
     }); //End of Onclick occupation title
