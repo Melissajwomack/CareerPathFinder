@@ -155,18 +155,29 @@
                     console.log("some currency error");
                     }
         }).then(response => {
-            if(response.LMI.AveragePayState == ""){
-                var AvgStatePay = "No Information Available";
-            }else{
-                var AvgStatePay = parseInt(response.LMI.AveragePayState); 
-            }
+            console.log(response);
 
-            if(response.LMI.AveragePayNational == ""){
-                var NtlStatePay = "No Information Available";
-            }else{
-                var NtlStatePay = parseInt(response.LMI.AveragePayNational);
-            }
+                //take out the commas
+                var AvgStatePay = response.LMI.AveragePayState;
+                AvgStatePay = AvgStatePay.replace(/,/g , "");
+                console.log(AvgStatePay);
 
+                var NtlStatePay = response.LMI.AveragePayNational;
+                NtlStatePay = NtlStatePay.replace(/,/g , "");
+                console.log(NtlStatePay);
+            
+                if(AvgStatePay == ""){
+                    AvgStatePay = "No Information Available";
+                }else{
+                    AvgStatePay = parseInt(AvgStatePay); 
+                }
+
+                if(response.LMI.AveragePayNational == ""){
+                    NtlStatePay = "No Information Available";
+                }else{
+                    NtlStatePay = parseInt(NtlStatePay);
+                }
+        
             var FormattedAvgStatePay = checkNullandNum(AvgStatePay);
             var FormattedNtlStatePay = checkNullandNum(NtlStatePay);
 
@@ -376,14 +387,14 @@ function mikesAjax(i){
         var results = response.results;
         schoolNameSearch = results[0].school.name;
         //Admission Rate
-        var admissionRate = results[0][2015].admissions.admission_rate.overall;
+        var admissionRate = results[0][2013].admissions.admission_rate.overall;
         // ACT Scores average
-        var actMidpoint = results[0][2015].admissions.act_scores.midpoint.cumulative;
+        var actMidpoint = results[0][2013].admissions.act_scores.midpoint.cumulative;
         //SAT Scores average
-        var satMidpoint = results[0][2015].admissions.sat_scores.average.overall;
+        var satMidpoint = results[0][2013].admissions.sat_scores.average.overall;
         //Tuition (in and out of state)
-        var tuitionInState = results[0][2015].cost.tuition.in_state;
-        var tuitionOutState = results[0][2015].cost.tuition.out_of_state;
+        var tuitionInState = results[0][2013].cost.tuition.in_state;
+        var tuitionOutState = results[0][2013].cost.tuition.out_of_state;
         // console.log(schoolNameSearch + " " + admissionRate + " " + actMidpoint + " " + satMidpoint + " " + tuitionInState + " " + tuitionOutState);
         
         //Add Card for School Info
