@@ -287,7 +287,7 @@
                     "<br>" +
                     "State: " + response.SchoolPrograms[i].StateName + 
                     "<br>" + 
-                    response.SchoolPrograms[i].SchoolName + "'s Website: <a target='_blank' href='https://" + response.SchoolPrograms[i].SchoolUrl + "'>" + response.SchoolPrograms[i].SchoolUrl + "</a>"
+                    "URL: " + "<a target='_blank' href='https://" + response.SchoolPrograms[i].SchoolUrl + "'>" + response.SchoolPrograms[i].SchoolUrl + "</a>"
                 );
 
 
