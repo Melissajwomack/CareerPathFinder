@@ -25,7 +25,8 @@ https://api.data.gov/ed/collegescorecard/v1/schools/?sort=2013.earnings.6_yrs_af
     https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe&location=Denver+CO
   
   */
-$(document).ready(function () {
+
+    $(document).ready(function () {
 
 
     var dataGovAPIKey = "&api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe";
@@ -55,6 +56,10 @@ $(document).ready(function () {
         //Empty divs for last search
         $("#occupation-div").empty();
 
+        //Add instructions
+       $("#occupation-div").html("<div class='row pl-1 pr-1'><div class='col-sm-12 d-inline-block text-center mb-4'><h6 class='mb-0 text-capitalize text-secondary'>Click on any career title below to learn more!</h6></div></div>"
+    );
+
         //User input for career field
         term = $("#careerInput").val().trim();
 
@@ -81,7 +86,7 @@ $(document).ready(function () {
 
                 //Title
                 var occupationTitleDiv = $("<h6>").attr("class", "card-header text-center bg-light occupation-title");
-                occupationTitleDiv.attr("style", "color:darkslategray");
+                occupationTitleDiv.attr("style", "color:blue;text-decoration:underline");
 
                 //Card body
                 var occupationCardBody = $("<div>").attr("class", "card-body");
@@ -236,7 +241,7 @@ $(document).ready(function () {
                 Accept: "application/json"
             }
         }).then(response => {
-
+            console.log("\n\nI am the greatest!\n\n")
             for (var i = 0; i < response.SchoolPrograms.length; i++) {
 
                 console.log(response.SchoolPrograms[i]);
@@ -284,11 +289,26 @@ $(document).ready(function () {
                 schoolDiv.append(schoolCardBody);
                 $("#colleges-div").append(schoolDiv);
             }
+             //collapse after Job Title selection
+            $("#collapseTwo").removeClass("show");
+             $("#collapseThree").addClass("show");
+            
         });
 
     });
+    
 
 }); //End of document.ready
+
+  // collapse after search button click
+  $("#submitBtn").on("click", function(){
+    $("#collapseOne").removeClass("show");
+    $("#collapseTwo").addClass("show");
+ });
+
+ 
+
+
 
 
 

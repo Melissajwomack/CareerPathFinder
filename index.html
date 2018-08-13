@@ -7,7 +7,8 @@ add text box that displays no results found if user searches doesnt populate any
 
 <!DOCTYPE html>
 <html lang="en">
- <head>
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -24,7 +25,7 @@ add text box that displays no results found if user searches doesnt populate any
         crossorigin="anonymous"></script> -->
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
@@ -34,8 +35,9 @@ add text box that displays no results found if user searches doesnt populate any
     <link href="https://fonts.googleapis.com/css?family=Raleway|PT+Sans" rel="stylesheet">
     <title>Career Path Finder</title>
 </head>
-<header>
-     <body class="bg-dark">
+<header id="masterHead">
+
+    <body class="bg-dark">
         <div class="row">
             <div class="col-sm-12 text-center">
                 <img src="assets/images/logo1.png" width="30" height="30" class="align-middle mt-2" alt="">
@@ -75,15 +77,13 @@ add text box that displays no results found if user searches doesnt populate any
                     <div class="col-sm-4">
                     </div>
                     <div class="col-sm-4 text-center mt-2 mb-4">
-                        
                         <!-- <textarea class="form-control" id="careerInput" rows="1"></textarea> -->
-
                         <input type="search" class="form-control" id="careerInput" rows="1" placeholder="Job Title">
                     </div>
                     <div class="col-sm-4">
                     </div>
                 </div>
-                 <div class="row">
+                <div class="row">
                     <div class="col-sm-12 text-center mt-2 mb-4">
                         <h6 class="mb-0 text-capitalize text-primary">Select a State
                         </h6>
@@ -156,7 +156,7 @@ add text box that displays no results found if user searches doesnt populate any
                 </div>
                 <div class="row ">
                     <div class="col-md-12 text-center">
-                        <button id="submitBtn">Search</button>
+                        <button type="button" class="searchButton" id="submitBtn">Search</button>
                     </div>
                 </div>
             </div>
@@ -179,29 +179,32 @@ add text box that displays no results found if user searches doesnt populate any
                                 </h6>
                             </div>
                         </div>
-                            <!-- Insert Content Here -->
-                            <!-- <div class="card bg-light">
+                        <!-- Insert Content Here -->
+                        <!-- <div class="card bg-light">
                         <h6 class="card-header text-center bg-light" style="color:darkslategray">Title/Description</h6>
                         <div class="card-body" style="padding:0px">
                             <p class="card-text"></p>
                             <a href="#" class="btn text-capitalize pt-0 pb-0 pr-2 pl-2" style="color:darkslategray!important">Test</a>
                         </div>
                     </div> -->
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col-sm-12">
-                <div class="card ml-4 mr-4">
-                    <div class="card-header bg-dark  text-center" id="headingThree">
+    </div>
+    <div class="row mt-3">
+        <div class="col-sm-12">
+            <div class="card ml-4 mr-4">
+                <div class="card-header bg-dark  text-center" id="headingThree">
+                    <div class="container">
                         <button class="btn btn-link mb-0" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true"
                             aria-controls="collapseThree">
-                            <h5 class="mb-0 text-capitalize text-light">Salary Info, Career Prospects, Education Requirements</h5>
-                            <i class="fas fa-chevron-circle-down mb-0 text-light"></i>
+                            
+                                <p class="mb-0 text-capitalize text-light">Salary Info, Career Prospects, Education Requirements</p>
+                                <i class="fas fa-chevron-circle-down mb-0 text-light"></i>
                         </button>
                     </div>
+                </div>
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                         <div class="card-body">
                             <!-- Insert Content Here -->
@@ -243,7 +246,7 @@ add text box that displays no results found if user searches doesnt populate any
                 </div>
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
 
-                    <div class="card-body" id ="colleges-div">
+                    <div class="card-body" id="colleges-div">
 
                         <!-- Insert Content Here -->
                         <!-- <div class="card bg-light mt-2">
@@ -269,4 +272,5 @@ add text box that displays no results found if user searches doesnt populate any
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="assets/javascript/app.js"></script>
     </body>
- </html> 
+
+</html>
