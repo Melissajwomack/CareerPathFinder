@@ -27,13 +27,11 @@ header {
  .btn-link {
     text-decoration: none!important;
 } 
+
 p.card-text:hover{
     background: #c2c2d6 !important;
 }
-button {
-    word-break: break-all !important;
-    white-space: wrap !important;
-}
+
 
 .btn{
       white-space: normal;
@@ -55,3 +53,10 @@ button {
   */
 
  
+
+
+#state {
+    width: 150px;
+    margin: 0 auto;
+}
+
