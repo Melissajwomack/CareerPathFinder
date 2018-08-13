@@ -22,3 +22,8 @@ header {
  .btn-link {
     text-decoration: none!important;
 } 
+
+#state {
+    width: 150px;
+    margin: 0 auto;
+}
