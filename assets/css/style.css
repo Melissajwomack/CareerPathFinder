@@ -15,7 +15,12 @@ header {
 }
  .card {
     padding: 0px!important;
+    word-break: break-all;
+    white-space: wrap;
+    
 }
+
+
  .card-header {
     padding: 0px!important;
 }
@@ -23,7 +28,35 @@ header {
     text-decoration: none!important;
 } 
 
+p.card-text:hover{
+    background: #c2c2d6 !important;
+}
+
+
+.btn{
+      white-space: normal;
+    }
+ /* @media only screen and (max-width: 480px) {
+    #masterHead {
+        position: static;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+    #accordionExample { 
+        width: 100%;
+        margin: 15px 0;
+        text-align: center;
+    }
+    
+
+} 
+  */
+
+ 
+
+
 #state {
     width: 150px;
     margin: 0 auto;
 }
+
