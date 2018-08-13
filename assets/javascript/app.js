@@ -87,7 +87,7 @@
 
                 //Title
                 var occupationTitleDiv = $("<h6>").attr("class", "card-header text-center bg-light occupation-title");
-                occupationTitleDiv.attr("style", "color:blue;text-decoration:underline");
+                occupationTitleDiv.attr("style", "color:blue;");
 
                 //Card body
                 var occupationCardBody = $("<div>").attr("class", "card-body");

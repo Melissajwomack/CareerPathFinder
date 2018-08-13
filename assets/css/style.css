@@ -27,13 +27,19 @@ header {
  .btn-link {
     text-decoration: none!important;
 } 
-
-
-
 .btn{
       white-space: normal;
     }
- /* @media only screen and (max-width: 480px) {
+.card-header.text-center.bg-light.occupation-title:hover {
+    background: #c2c2d6!important;
+ }
+
+#state {
+    width: 150px;
+    margin: 0 auto;
+}
+
+/* @media only screen and (max-width: 480px) {
     #masterHead {
         position: static;
         margin-bottom: 20px;
@@ -51,9 +57,4 @@ header {
 
  
 
-
-#state {
-    width: 150px;
-    margin: 0 auto;
-}
 
