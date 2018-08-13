@@ -283,11 +283,13 @@
                 $("#colleges-div").append(schoolDiv);
 
                 mikesAjax(i);
+                //collapse after Job Title selection
+                $("#collapseTwo").removeClass("show");
+                $("#collapseThree").addClass("show");
                 
             }//End of for loop
-               //collapse after Job Title selection
-            $("#collapseTwo").removeClass("show");
-             $("#collapseThree").addClass("show");
+               
+            
         }); // End of Melissa ajax
         
     }); //End of Onclick occupation title
