@@ -64,8 +64,13 @@ $(document).ready(function () {
             headers: {
                 // OUR API TOKEN
                 Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
-                Accept: "application/json"
-            }
+                Accept: "application/json",
+                
+                },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("some error occupation");
+                    }
+            
         }).then(response => {
 
             for (i = 0; i < response.OccupationList.length; i++) {
@@ -138,21 +143,32 @@ $(document).ready(function () {
             headers: {
                 // OUR API TOKEN
                 Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
-                Accept: "application/json"
-            }
+                Accept: "application/json",
+                
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("some currency error");
+                    }
         }).then(response => {
-            var AvgStatePay = response.LMI.AveragePayState;
-            var NtlStatePay = response.LMI.AveragePayNational;
+            if(response.LMI.AveragePayState == ""){
+                var AvgStatePay = "No Information Available";
+            }else{
+                var AvgStatePay = parseInt(response.LMI.AveragePayState); 
+            }
 
-            // AvgStatePay = AvgStatePay.formatMoney(2, ".", ",");
-            // NtlStatePay = NtlStatePay.formatMoney(2, ".", ",");
+            if(response.LMI.AveragePayNational == ""){
+                var NtlStatePay = "No Information Available";
+            }else{
+                var NtlStatePay = parseInt(response.LMI.AveragePayNational);
+            }
+
+            var FormattedAvgStatePay = checkNullandNum(AvgStatePay);
+            var FormattedNtlStatePay = checkNullandNum(NtlStatePay);
 
             //Populate salary info
-            $("#salary").html("Average pay in " + location + ": $" + AvgStatePay +
+            $("#salary").html("Average pay in " + location + ": " + FormattedAvgStatePay +
             "<br>" +
-            "National average pay: $" + NtlStatePay);
-            console.log(response.LMI.AveragePayState);
-            console.log(response.LMI.AveragePayNational);
+            "National average pay: " + FormattedNtlStatePay);
 
             //Populate education reqs
             $("#edReqs").text("Typical education required: " + response.LMI.TypicalTraining)
@@ -170,7 +186,48 @@ $(document).ready(function () {
                 Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
                 Accept: "application/json"
             },
-            // success: mikesAjax 
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                //Card
+                var schoolDiv = $("<div>").attr("class", "card bg-light mb-3");
+
+                //Title
+                var schoolTitleDiv = $("<h6>").attr("class", "card-header text-center bg-light");
+                schoolTitleDiv.attr("style", "color:darkslategray");
+                schoolTitleDiv.attr("id", "school-title"+i);
+                schoolTitleDiv.attr("data-list", "No Information Available");
+
+                //Card body
+                var schoolCardBody = $("<div>").attr("class", "card-body");
+                schoolCardBody.attr("id", "collegeInfo");
+                schoolCardBody.attr("style", "padding:0px");
+
+                //School info
+                var schoolInfoDiv = $("<p>").attr("class", "card-text");
+                schoolInfoDiv.attr("id", "colleges" + i);
+
+                //Populate new divs
+
+                //Title
+                schoolTitleDiv.text("No Information Available");
+
+                //School info
+                schoolInfoDiv.html(
+                    "City: " + "No Information Available" +
+                    "<br>" +
+                    "State: " + "No Information Available" +
+                    "<br>" +
+                    "Program Name: " + "No Information Available" 
+                );
+
+
+                //Append divs to main dropdown
+                schoolCardBody.append(schoolInfoDiv);
+                schoolDiv.append(schoolTitleDiv);
+                schoolDiv.append(schoolCardBody);
+                $("#colleges-div").append(schoolDiv);
+
+                }
+
         }).then(response => {
             var schools=[];
             for (var i = 0; i < response.SchoolPrograms.length; i++) {
@@ -229,7 +286,7 @@ $(document).ready(function () {
 }); //End of document.ready
 
 function checkNullandNum(value){
-    if(value === null){
+    if(value === null || value === ""){
         return "Info Not Available";
     }else if(isFloat(value)){
         value *= 100;
@@ -281,7 +338,25 @@ function mikesAjax(i){
     console.log(urlDataGov);
     $.ajax({
         url: urlDataGov,
-        method: "GET"
+        method: "GET",
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            //Card
+        var infoDiv = $("<p>");
+        infoDiv.attr("class", "card-text");
+        infoDiv.attr("id", "school-details");
+        // $("#school-details").attr("style", "display: inline-block;");
+
+
+        infoDiv.html(
+            "Admission Rate: " + "Information Not Available" + "<br>" +
+            "Cumulative ACT Score: " + "Information Not Available" + "<br>" +
+            "Overal SAT Score: " + "Information Not Available" + "<br>" +
+            "In-State Tuition: " + "Information Not Available" + "<br>" +
+            "Out-of-State Tuition: " + "Information Not Available"
+            );
+
+            $("#colleges" + i).append(infoDiv);
+        }
     }).then(response => {
         // console.log(response);
 
