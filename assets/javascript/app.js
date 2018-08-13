@@ -40,6 +40,8 @@ $(document).ready(function () {
 
     var term;
 
+    var schoolClicked = false;
+
     $("#state").on("change", function () {
         location = $(this).val();
         schoolState = location;
@@ -125,6 +127,7 @@ $(document).ready(function () {
 
     $(document).on("click", "#school-title", function(){
         console.log($(this).text());
+        var schoolNameSearch = "";
         var schoolChosen = $(this).text();
 
             //ajax call for School by Location
@@ -150,7 +153,8 @@ $(document).ready(function () {
                
 
                 // const urlDataGov = "https://api.data.gov/ed/collegescorecard/v1/schools/?sort=2013.earnings.6_yrs_after_entry.percent_greater_than_25000%3Adesc&school.operating=1&2015.student.size__range=1..&2015.academics.program_available.assoc_or_bachelors=true&2015.academics.program.degree." + "Physician%20Assistant" + "__range=1..&school.name=" + "University of the Cumberlands" + dataGovAPIKey;
-
+            // if(!schoolClicked){
+                schoolClicked = true;
                 const urlDataGov = "https://api.data.gov/ed/collegescorecard/v1/schools?" + dataGovAPIKey + "&school.name=" + schoolChosen;
 
                 $.ajax({
@@ -159,9 +163,8 @@ $(document).ready(function () {
                 }).then(response => {
                     // console.log(response);
 
-                    var mostCurrent = "2015";
                     var results = response.results;
-                    var schoolNameSearch = results[0].school.name;
+                    schoolNameSearch = results[0].school.name;
                     //Admission Rate
                     var admissionRate = results[0][2015].admissions.admission_rate.overall;
                     // ACT Scores average
@@ -171,12 +174,14 @@ $(document).ready(function () {
                     //Tuition (in and out of state)
                     var tuitionInState = results[0][2015].cost.tuition.in_state;
                     var tuitionOutState = results[0][2015].cost.tuition.out_of_state;
-                    console.log(schoolNameSearch + " " + admissionRate + " " + actMidpoint + " " + satMidpoint + " " + tuitionInState + " " + tuitionOutState);
+                    // console.log(schoolNameSearch + " " + admissionRate + " " + actMidpoint + " " + satMidpoint + " " + tuitionInState + " " + tuitionOutState);
                     
                     //Add Card for School Info
                     
                     //Card
                     var infoDiv = $("<div>").attr("class", "card bg-light mb-3");
+                    infoDiv.attr("id", "school-details");
+                    // $("#school-details").attr("style", "display: inline-block;");
 
                     //Card Body
                     var infoCardBody = $("<div>").attr("class", "card-body");
@@ -187,38 +192,30 @@ $(document).ready(function () {
                     schoolInfoDiv.attr("id", "schoolInfo");
 
                     infoDiv.html(
-                        "Admission Rate: " + checkNull(admissionRate) + "<br>" +
+                        "Admission Rate: " + checkNullandNum(admissionRate) + "<br>" +
                         "Cumulative ACT Score: " + checkNull(actMidpoint) + "<br>" +
                         "Overal SAT Score: " + checkNull(satMidpoint) + "<br>" +
-                        "In-State Tuition: " + checkNull(tuitionInState) + "<br>" +
-                        "Out-of-State Tuition: " + checkNull(tuitionOutState)
+                        "In-State Tuition: " + checkNullandNum(tuitionInState) + "<br>" +
+                        "Out-of-State Tuition: " + checkNullandNum(tuitionOutState)
                     );
 
                  //Need to put on the appropriate school clicked >_<
                  //Number of School Entries ==> i
-                 
-                 
-                for(var i = 0; i < 5; i++){
-                    console.log("schoolNameSearch + i = " + schoolNameSearch + i); 
-                    var subName = $("#school-title").attr("list").trim();
-                    subName.substring(0, subName.length-2);
-                    console.log("list value = " + subName);
-                    if(subName + i === schoolNameSearch+i){
+           
 
-                        //Append divs to main dropdown
-                        infoCardBody.append(schoolInfoDiv);
-                        infoDiv.append(infoCardBody);
-                        var collegeBox = $("#collegeInfo");
-                        collegeBox.prepend(infoDiv);
-                     }
-                     else{
-                         console.log("nope");
-                         console.log(subName+i);
-                     }
-                 }
-
+                    //Append divs to main dropdown
+                    infoCardBody.append(schoolInfoDiv);
+                    infoDiv.append(infoCardBody);
+                    var collegeBox = $("#collegeInfo");
+                    $(this).append(infoDiv);
+                   
+                 
                 });
-
+            // }else {
+            //     schoolClicked = false;
+            //     console.log("unclicked");
+            //     $("#school-details").attr("style", "display: hidden;");
+            // }
 
                
             }); //End of Onclick School Title
@@ -290,7 +287,7 @@ $(document).ready(function () {
                 var schoolTitleDiv = $("<h6>").attr("class", "card-header text-center bg-light");
                 schoolTitleDiv.attr("style", "color:darkslategray");
                 schoolTitleDiv.attr("id", "school-title");
-                schoolTitleDiv.attr("list", response.SchoolPrograms[i].SchoolName+i);
+                schoolTitleDiv.attr("list", response.SchoolPrograms[i].SchoolName);
 
                 //Card body
                 var schoolCardBody = $("<div>").attr("class", "card-body");
@@ -332,6 +329,20 @@ $(document).ready(function () {
 
 }); //End of document.ready
 
+function checkNullandNum(value){
+    if(value === null){
+        return "Info Not Available";
+    }else if(isFloat(value)){
+        return parseFloat(value).toFixed(2)+"%";
+    }else if(isInt(value)){
+        value *= 100;
+        return "$" + value + ".00";
+    }
+    else {
+        return value;
+    }
+}
+
 function checkNull(value){
     if(value === null){
         return "Info Not Available";
@@ -339,5 +350,13 @@ function checkNull(value){
     else {
         return value;
     }
+}
+
+function isInt(n){
+    return Number(n) === n && n % 1 === 0;
+}
+
+function isFloat(n){
+    return Number(n) === n && n % 1 !== 0;
 }
 
