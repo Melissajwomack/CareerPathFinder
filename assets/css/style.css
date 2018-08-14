@@ -1,5 +1,4 @@
 header {
-    background-image: url("../../assets/images/navbg2.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
     height: auto;
@@ -7,7 +6,6 @@ header {
     color: #fff;
 }
  body {
-    background-image: url("../../assets/images/bodybg.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
     height: auto;
@@ -37,6 +35,11 @@ header {
 #state {
     width: 150px;
     margin: 0 auto;
+}
+.material-icons.right {
+    text-align: center!important;
+    display: block;
+    margin: auto;
 }
 
 /* @media only screen and (max-width: 480px) {
