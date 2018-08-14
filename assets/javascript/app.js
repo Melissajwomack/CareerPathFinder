@@ -25,9 +25,11 @@
     https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe&location=Denver+CO
   
   */
+var numSchools;
 
 $(document).ready(function () {
-
+    // localStorage.clear();
+    
 
     var dataGovAPIKey = "&api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe";
 
@@ -40,7 +42,7 @@ $(document).ready(function () {
     $("#state").on("change", function () {
         location = $(this).val();
         schoolState = location;
-        console.log(location);
+        localStorage.setItem("state", location);
     });
 
 
@@ -58,6 +60,7 @@ $(document).ready(function () {
 
         //User input for career field
         term = $("#careerInput").val().trim();
+        localStorage.setItem("career", term);
 
         // Job title and job description
         // Getting ONetCode for other calls
@@ -106,12 +109,12 @@ $(document).ready(function () {
                 //Populate divs with info
                 //Title
                 var occupationTitle = response.OccupationList[i].OnetTitle;
-                console.log(occupationTitle);
+                localStorage.setItem("occupation", occupationTitle);
                 occupationTitleDiv.text(occupationTitle);
 
                 //Description
                 var occupationDescription = response.OccupationList[i].OccupationDescription;
-                console.log(occupationDescription)
+                localStorage.setItem("description", occupationDescription);
                 occupationDescDiv.text(occupationDescription);
 
                 //Append divs to main drop down
@@ -130,7 +133,7 @@ $(document).ready(function () {
 
     //When occupation is chosen
     $(document).on("click", ".occupation-title", function () {
-
+        
         //Empty divs when new occupation is clicked
         $("#salary").empty();
         $("#edReqs").empty();
@@ -179,7 +182,9 @@ $(document).ready(function () {
             }
 
             var FormattedAvgStatePay = checkNullandNum(AvgStatePay);
+            localStorage.setItem("statePay", FormattedAvgStatePay);
             var FormattedNtlStatePay = checkNullandNum(NtlStatePay);
+            localStorage.setItem("ntlPay", FormattedNtlStatePay);
 
             //Populate salary info
             $("#salary").html("Average pay in " + location + ": " + FormattedAvgStatePay +
@@ -188,6 +193,7 @@ $(document).ready(function () {
 
             //Populate education reqs
             $("#edReqs").text("Typical education required: " + response.LMI.TypicalTraining)
+            localStorage.setItem("training", response.LMI.TypicalTraining);
 
         });
 
@@ -236,6 +242,7 @@ $(document).ready(function () {
                     "Program Name: " + "No Information Available" +
                     "<br>" +
                     "URL: " + "No Information Available"
+                    
                 );
 
 
@@ -249,10 +256,15 @@ $(document).ready(function () {
                 $("#collapseTwo").removeClass("show");
                 $("#collapseThree").addClass("show");
 
+                for(var error = 0; error < 5; error++){
+                    localStorage.setItem("schoolName"+error, "Info Not Available");
+                    localStorage.setItem("schooURL"+error, "Info Not Available");
+                }
+
             }
 
         }).then(response => {
-
+            numSchools = response.SchoolPrograms.length;
             for (var i = 0; i < response.SchoolPrograms.length; i++) {
 
                 //collapse after Job Title selection
@@ -269,6 +281,7 @@ $(document).ready(function () {
                 schoolTitleDiv.attr("style", "color:darkslategray");
                 schoolTitleDiv.attr("id", "school-title" + i);
                 schoolTitleDiv.attr("data-list", response.SchoolPrograms[i].SchoolName);
+                localStorage.setItem("schoolName" +i, response.SchoolPrograms[i].SchoolName);
 
                 //Card body
                 var schoolCardBody = $("<div>").attr("class", "card-body");
@@ -294,6 +307,8 @@ $(document).ready(function () {
                     "<br>" +
                     "URL: " + "<a target='_blank' href='https://" + response.SchoolPrograms[i].SchoolUrl + "'>" + response.SchoolPrograms[i].SchoolUrl + "</a>"
                 );
+                
+                localStorage.setItem("schoolURL"+i, response.SchoolPrograms[i].SchoolUrl);
 
 
                 //Append divs to main dropdown
@@ -310,7 +325,8 @@ $(document).ready(function () {
 
 
         }); // End of Melissa ajax
-
+        console.log(localStorage);
+        createPath();
     }); //End of Onclick occupation title
 
     // collapse after search button click
@@ -319,6 +335,7 @@ $(document).ready(function () {
         $("#collapseTwo").addClass("show");
     });
 }); //End of document.ready
+
 
 function checkNullandNum(value) {
     if (value === null || value === "") {
@@ -425,6 +442,13 @@ function mikesAjax(i) {
             "Out-of-State Tuition: " + checkNullandNum(tuitionOutState)
         );
 
+        localStorage.setItem("AdmissionRate", checkNullandNum(admissionRate));
+        localStorage.setItem("ACTScore", checkNull(actMidpoint));
+        localStorage.setItem("SATScore", checkNull(satMidpoint));
+        localStorage.setItem("InStateTuition", checkNullandNum(tuitionInState));
+        localStorage.setItem("OutofStateTuition", checkNullandNum(tuitionOutState));
+
+
         //Need to put on the appropriate school clicked >_<
         //Number of School Entries ==> i
 
@@ -436,5 +460,67 @@ function mikesAjax(i) {
 
 
     });// End of Mike ajax
+}
+
+function createPath(){
+    $("#path-div").empty();
+    //create visual path with divs
+    // var rowDiv = $("<div>");
+    // rowDiv.attr("class", "row");
+
+    // var colDiv = $("<div>");
+    // colDiv.attr("class", "col-sm-12");
+
+    var PathDiv = $("<div>");
+    PathDiv.attr("class", "bg-dark");
+    PathDiv.css({"background-image": "url(assets/images/pathGraphicUpdated.png)", "background-repeat": "no-repeat", "position": "relative","height": "800px", "width": "1024px", "margin": "0 auto"});
+    
+    var searchTermDiv = $("<div>");
+    // searchTermDiv.attr("class","alert alert-light");
+    searchTermDiv.css({"margin": "25px", "width": "100px", "position": "absolute", "top": "92px", "left": "214px"});
+    searchTermDiv.attr("id", "term");
+    
+    var locationDiv = $("<div>");
+    // locationDiv.attr("class","alert alert-light");
+    locationDiv.css({"margin": "25px", "width": "100px", "position": "absolute", "top": "92px", "left": "485px"});
+    locationDiv.attr("id", "location");
+
+    
+    var occupationDiv = $("<div>");
+    // occupationDiv.attr("class","alert alert-light");
+    occupationDiv.css({"margin": "25px", "width": "250px", "position": "absolute", "top": "255px", "left": "700px"});
+    occupationDiv.attr("id", "occupation");
+
+    
+    var schoolsDiv = $("<div>");
+    // schoolsDiv.attr("class","alert alert-light");
+    schoolsDiv.css({"margin": "25px", "width": "300px", "position": "absolute", "top": "357px", "left": "34px"});
+    schoolsDiv.attr("id", "schools");
+
+    var schoolsP = $("<p>");
+    schoolsP.attr("id", "schoolList");
+
+   
+    //set values from local storage
+    searchTermDiv.text(localStorage.getItem("career"));
+    locationDiv.text(localStorage.getItem("state"));
+    occupationDiv.text(localStorage.getItem("occupation"));
+    
+    for(var m = 0; m < 5; m++){
+        schoolsP.append(localStorage.getItem("schoolName"+m) + "<br>");
+    }
+
+    //append to all the things
+    schoolsDiv.append(schoolsP);
+
+
+    PathDiv.append(searchTermDiv);
+    PathDiv.append(locationDiv);
+    PathDiv.append(occupationDiv);
+    PathDiv.append(schoolsDiv);
+    
+    // colDiv.append(PathDiv);
+    // rowDiv.append(colDiv);
+    $("#path-div").append(PathDiv);
 }
 
