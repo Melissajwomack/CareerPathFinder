@@ -425,9 +425,7 @@ function mikesAjax(i) {
             "Out-of-State Tuition: " + checkNullandNum(tuitionOutState)
         );
 
-        //Need to put on the appropriate school clicked >_<
-        //Number of School Entries ==> i
-
+       
 
         //Datagov Populate
         //Append divs to main dropdown
