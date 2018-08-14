@@ -182,12 +182,12 @@ $(document).ready(function () {
             var FormattedNtlStatePay = checkNullandNum(NtlStatePay);
 
             //Populate salary info
-            $("#salary").html("Average pay in " + location + ": " + FormattedAvgStatePay +
+            $("#salary").html("<strong>Average pay in</strong> " + location + ": " + FormattedAvgStatePay +
                 "<br>" +
-                "National average pay: " + FormattedNtlStatePay);
+                "<strong>National average pay:</strong> " + FormattedNtlStatePay);
 
             //Populate education reqs
-            $("#edReqs").text("Typical education required: " + response.LMI.TypicalTraining)
+            $("#edReqs").html("<strong>Typical education required:</strong> " + response.LMI.TypicalTraining)
 
         });
 
@@ -233,7 +233,7 @@ $(document).ready(function () {
                     "<br>" +
                     "State: " + "No Information Available" +
                     "<br>" +
-                    "Program Name: " + "No Information Available" +
+                    "Program Name:" + "No Information Available" +
                     "<br>" +
                     "URL: " + "No Information Available"
                 );
@@ -286,13 +286,13 @@ $(document).ready(function () {
 
                 //School info
                 schoolInfoDiv.html(
-                    "Program Name: " + response.SchoolPrograms[i].ProgramName +
+                    "<strong>Program Name: </strong>" + response.SchoolPrograms[i].ProgramName +
                     "<br>" +
-                    "City: " + response.SchoolPrograms[i].City +
+                    "<strong>City:</strong> " + response.SchoolPrograms[i].City +
                     "<br>" +
-                    "State: " + response.SchoolPrograms[i].StateName +
+                    "<strong>State:</strong> " + response.SchoolPrograms[i].StateName +
                     "<br>" +
-                    "URL: " + "<a target='_blank' href='https://" + response.SchoolPrograms[i].SchoolUrl + "'>" + response.SchoolPrograms[i].SchoolUrl + "</a>"
+                    "<strong>URL:</strong> " + "<a target='_blank' href='https://" + response.SchoolPrograms[i].SchoolUrl + "'>" + response.SchoolPrograms[i].SchoolUrl + "</a>"
                 );
 
 
@@ -418,11 +418,11 @@ function mikesAjax(i) {
 
 
         infoDiv.html(
-            "Admission Rate: " + checkNullandNum(admissionRate) + "<br>" +
-            "Cumulative ACT Score: " + checkNull(actMidpoint) + "<br>" +
-            "Overal SAT Score: " + checkNull(satMidpoint) + "<br>" +
-            "In-State Tuition: " + checkNullandNum(tuitionInState) + "<br>" +
-            "Out-of-State Tuition: " + checkNullandNum(tuitionOutState)
+            "<strong>Admission Rate:</strong> " + checkNullandNum(admissionRate) + "<br>" +
+            "<strong>Cumulative ACT Score:</strong> " + checkNull(actMidpoint) + "<br>" +
+            "<strong>Overal SAT Score:</strong> " + checkNull(satMidpoint) + "<br>" +
+            "<strong>In-State Tuition:</strong> " + checkNullandNum(tuitionInState) + "<br>" +
+            "<strong>Out-of-State Tuition:</strong> " + checkNullandNum(tuitionOutState)
         );
 
        

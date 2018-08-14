@@ -37,6 +37,19 @@ header {
     margin: 0 auto;
 }
 
+p#colleges0.card-text{
+    padding: 0px 0px 0px 10px!important;
+}
+p#salary.card-text {
+    padding: 0px 0px 0px 10px!important;
+}
+p#edReqs.card-text {
+    padding: 0px 0px 0px 10px!important;
+    
+}
+
+
+
 
  
 
