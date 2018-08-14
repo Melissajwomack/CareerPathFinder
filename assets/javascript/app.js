@@ -131,7 +131,10 @@ $(document).ready(function () {
     //When occupation is chosen
     $(document).on("click", ".occupation-title", function () {
 
-        //Empty divs when new occupation is clicked
+        //Add divs for salary and ed reqs
+        $("#salEdReqs").html("<div class='card bg-light'><h6 class='card-header text-center bg-light' style='color:darkslategray'>Salary Info</h6><div class='card-body' style='padding:0px'><p class='card-text' id='salary'></p></div></div><div class='card bg-light mt-2'><h6 class='card-header text-center bg-light' style='color:darkslategray'>Education Requirements</h6><div class='card-body' style='padding:0px'><p class='card-text' id='edReqs'></p></div></div>")
+        
+        //Empty divs when new occupation is clicked   
         $("#salary").empty();
         $("#edReqs").empty();
         $("#colleges-div").empty();
