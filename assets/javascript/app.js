@@ -386,11 +386,11 @@ function mikesAjax(i) {
 
 
             infoDiv.html(
-                "Admission Rate: " + "Information Not Available" + "<br>" +
-                "Cumulative ACT Score: " + "Information Not Available" + "<br>" +
-                "Overal SAT Score: " + "Information Not Available" + "<br>" +
-                "In-State Tuition: " + "Information Not Available" + "<br>" +
-                "Out-of-State Tuition: " + "Information Not Available"
+                "<strong>Admission Rate: </strong>" + "Information Not Available" + "<br>" +
+                "<strong> Cumulative ACT Score: </strong>" + "Information Not Available" + "<br>" +
+                "<strong> Overal SAT Score: </strong>" + "Information Not Available" + "<br>" +
+                "<strong> In-State Tuition: </strong>" + "Information Not Available" + "<br>" +
+                "<strong> Out-of-State Tuition: </strong>" + "Information Not Available"
             );
 
             $("#colleges" + i).append(infoDiv);
