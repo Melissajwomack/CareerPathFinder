@@ -18,19 +18,21 @@ header {
     
 }
 
-
  .card-header {
     padding: 0px!important;
 }
+
  .btn-link {
     text-decoration: none!important;
 } 
+
 .btn{
       white-space: normal;
-    }
+}
+
 .card-header.text-center.bg-light.occupation-title:hover {
     background: #c2c2d6!important;
- }
+}
 
 #state {
     width: 150px;
@@ -40,9 +42,11 @@ header {
 p#colleges0.card-text{
     padding: 0px 0px 0px 10px!important;
 }
+
 p#salary.card-text {
     padding: 0px 0px 0px 10px!important;
 }
+
 p#edReqs.card-text {
     padding: 0px 0px 0px 10px!important;
     

@@ -1,35 +1,5 @@
-/* APIs
-  careerOneStop
-  ----------------------
-  Your unique user ID:
-  JSoak5q9cSjVtxE
-  Your Token key:
-  EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA== 
---------------------------------------------------------
-  data.gov
-  college score card
-  ----------------------
-  api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe
-    You can start using this key to make web service requests. Simply pass your key in the URL when making a web request. Here's an example:
-
-    https://api.data.gov/ed/collegescorecard/v1/schools?api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe&school.name=University%20of%20Texas
-
-    visual search: https://collegescorecard.ed.gov/
-
-    https://api.data.gov/ed/collegescorecard/v1/schools/?sort=2013.earnings.6_yrs_after_entry.percent_greater_than_25000%3Adesc&school.operating=1&2015.student.size__range=1..&2015.academics.program_available.assoc_or_bachelors=true
-
-    &school.state=TX
-
-    &school.degrees_awarded.predominant__range=1..3&school.degrees_awarded.highest__range=2..4&fields=id%2Cschool.name%2Cschool.city%2Cschool.state%2C2015.student.size%2Cschool.branches%2Cschool.ownership%2Cschool.degrees_awarded.predominant%2C2015.cost.avg_net_price.overall%2C2015.completion.rate_suppressed.overall%2C2013.earnings.10_yrs_after_entry.median%2C2013.earnings.6_yrs_after_entry.percent_greater_than_25000%2Cschool.under_investigation&api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe
-
-    https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe&location=Denver+CO
-  
-  */
 
 $(document).ready(function () {
-
-
-    var dataGovAPIKey = "&api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe";
 
     var occupationOnetCode;
 
@@ -37,17 +7,14 @@ $(document).ready(function () {
 
     var term;
 
+    //Setting location variable for later use
     $("#state").on("change", function () {
         location = $(this).val();
         schoolState = location;
-        console.log(location);
     });
-
 
     //when submit button is pushed
     $(document).on("click", "#submitBtn", function (event) {
-        console.log("button clicked");
-
 
         //Empty divs for last search
         $("#occupation-div").empty();
@@ -63,6 +30,7 @@ $(document).ready(function () {
         // Getting ONetCode for other calls
         const urlTitleDescription = "https://api.careeronestop.org/v1/occupation/JSoak5q9cSjVtxE/" + term + "/N/0/10"
 
+        //Call for occupations from CareerOneStop
         $.ajax({
             url: urlTitleDescription,
             method: "GET",
@@ -72,8 +40,16 @@ $(document).ready(function () {
                 Accept: "application/json",
 
             },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("some error occupation");
+            error: function () {
+                $("#occupation-div").html(
+                    "<div class='row pl-1 pr-1'>" +
+                    "<div class='col-sm-12 d-inline-block text-center'>" +
+                    "<h6 class='mb-0 text-capitalize text-primary'>" +
+                    "Try another search term!" +
+                    "</h6>" +
+                    "</div>" +
+                    "</div>"
+                )
             }
 
         }).then(response => {
@@ -98,7 +74,7 @@ $(document).ready(function () {
 
                 // O*Net Code for each occupation
                 occupationOnetCode = response.OccupationList[i].OnetCode;
-                console.log(occupationOnetCode);
+
                 //Assign title with O*Net ID for use with other ajax calls
                 occupationTitleDiv.attr("value", occupationOnetCode);
 
@@ -106,12 +82,10 @@ $(document).ready(function () {
                 //Populate divs with info
                 //Title
                 var occupationTitle = response.OccupationList[i].OnetTitle;
-                console.log(occupationTitle);
                 occupationTitleDiv.text(occupationTitle);
 
                 //Description
                 var occupationDescription = response.OccupationList[i].OccupationDescription;
-                console.log(occupationDescription)
                 occupationDescDiv.text(occupationDescription);
 
                 //Append divs to main drop down
@@ -120,13 +94,9 @@ $(document).ready(function () {
                 occupationDiv.append(occupationCardBody);
                 $("#occupation-div").append(occupationDiv);
 
-
             } //End of for Loop
-
-
         });
     });
-
 
     //When occupation is chosen
     $(document).on("click touchstart", ".occupation-title", function () {
@@ -134,7 +104,7 @@ $(document).ready(function () {
         //Add divs for salary and ed reqs
         $("#salEdReqs").html(
             "<div class='card bg-light'><h6 class='card-header text-center bg-light' style='color:darkslategray'>Salary Info</h6><div class='card-body' style='padding:0px'><p class='card-text' id='salary'></p></div></div><div class='card bg-light mt-2'><h6 class='card-header text-center bg-light' style='color:darkslategray'>Education Requirements</h6><div class='card-body' style='padding:0px'><p class='card-text' id='edReqs'></p></div></div>")
-        
+
         //Empty divs when new occupation is clicked   
         $("#salary").empty();
         $("#edReqs").empty();
@@ -146,6 +116,7 @@ $(document).ready(function () {
         // Typical education for chosen occupation 
         const urlOnetCode = "https://api.careeronestop.org/v1/lmi/JSoak5q9cSjVtxE/" + occupationOnetCode + "/" + location
 
+        //Call for salary and typical education from CareerOneStop
         $.ajax({
             url: urlOnetCode,
             method: "GET",
@@ -155,20 +126,25 @@ $(document).ready(function () {
                 Accept: "application/json",
 
             },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log("some currency error");
+            error: function () {
+                ("#salEdRegs").html(
+                    "<div class='row pl-1 pr-1'>" +
+                    "<div class='col-sm-12 d-inline-block text-center'>" +
+                    "<h6 class='mb-0 text-capitalize text-primary'>" +
+                    "No Information Available" +
+                    "</h6>" +
+                    "</div>" +
+                    "</div>"
+                )
             }
         }).then(response => {
-            console.log(response);
 
             //take out the commas
             var AvgStatePay = response.LMI.AveragePayState;
             AvgStatePay = AvgStatePay.replace(/,/g, "");
-            console.log(AvgStatePay);
 
             var NtlStatePay = response.LMI.AveragePayNational;
             NtlStatePay = NtlStatePay.replace(/,/g, "");
-            console.log(NtlStatePay);
 
             if (AvgStatePay == "") {
                 AvgStatePay = "No Information Available";
@@ -184,6 +160,7 @@ $(document).ready(function () {
 
             var FormattedAvgStatePay = checkNullandNum(AvgStatePay);
             var FormattedNtlStatePay = checkNullandNum(NtlStatePay);
+            var TypicalTrainingErrorCatch = checkNullandNum(response.LMI.TypicalTraining)
 
             //Populate salary info
             $("#salary").html("<strong>Average pay in</strong> " + location + ": " + FormattedAvgStatePay +
@@ -191,13 +168,14 @@ $(document).ready(function () {
                 "<strong>National average pay:</strong> " + FormattedNtlStatePay);
 
             //Populate education reqs
-            $("#edReqs").html("<strong>Typical education required:</strong> " + response.LMI.TypicalTraining)
+            $("#edReqs").html("<strong>Typical education required:</strong> " + TypicalTrainingErrorCatch);
 
         });
 
         // School information for state related to chosen occupation
         const urlProgramsbyOccpation = "https://api.careeronestop.org/v1/training/JSoak5q9cSjVtxE/" + occupationOnetCode + "/" + location + "/50/0/0/0/0/0/0/0/0/5"
 
+        //Call for schools by location related to chosen occupation
         $.ajax({
             url: urlProgramsbyOccpation,
             method: "GET",
@@ -205,9 +183,8 @@ $(document).ready(function () {
                 // OUR API TOKEN
                 Authorization: "Bearer EpjdrTPww1oYCMGKS8r1cJzQD/M+rH43tuZPAQfd6eJgZPa8XPe8G0N9zSEdD/lWCHT+A1wN+niAY+bSU18adA==",
                 Accept: "application/json"
-
             },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            error: function () {
                 //Card
                 var schoolDiv = $("<div>").attr("class", "card bg-light mb-3");
 
@@ -252,9 +229,7 @@ $(document).ready(function () {
                 //collapse after Job Title selection
                 $("#collapseTwo").removeClass("show");
                 $("#collapseThree").addClass("show");
-
             }
-
         }).then(response => {
 
             for (var i = 0; i < response.SchoolPrograms.length; i++) {
@@ -306,15 +281,10 @@ $(document).ready(function () {
                 schoolDiv.append(schoolCardBody);
                 $("#colleges-div").append(schoolDiv);
 
-                mikesAjax(i);
-
-
+                dataGovAjax(i);
 
             }//End of for loop
-
-
-        }); // End of Melissa ajax
-
+        });
     }); //End of Onclick occupation title
 
     // collapse after search button click
@@ -324,6 +294,7 @@ $(document).ready(function () {
     });
 }); //End of document.ready
 
+//Functions to catch errors
 function checkNullandNum(value) {
     if (value === null || value === "") {
         return "Info Not Available";
@@ -366,26 +337,23 @@ Number.prototype.formatMoney = function (c, d, t) {
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 };
 
-function mikesAjax(i) {
+//Call for more information on schools from data.gov
+function dataGovAjax(i) {
     var dataGovAPIKey = "&api_key=a5c66Ijh8yZArwVevtDrj3pRsW3lGaLrCER5CfQe";
-    //ajax call for School by Location
+    
     var schoolChosen = $("#school-title" + i).attr("data-list");
-    console.log(schoolChosen);
-    // if(!schoolClicked){
-    //     schoolClicked = true;
+
     const urlDataGov = "https://api.data.gov/ed/collegescorecard/v1/schools?" + dataGovAPIKey + "&school.name=" + schoolChosen;
-    console.log(urlDataGov);
+
+    //ajax call for School by Location
     $.ajax({
         url: urlDataGov,
         method: "GET",
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
+        error: function () {
             //Card
             var infoDiv = $("<p>");
             infoDiv.attr("class", "card-text");
             infoDiv.attr("id", "school-details");
-            // $("#school-details").attr("style", "display: inline-block;");
-
-
             infoDiv.html(
                 "<strong>Admission Rate: </strong>" + "Information Not Available" + "<br>" +
                 "<strong> Cumulative ACT Score: </strong>" + "Information Not Available" + "<br>" +
@@ -397,7 +365,6 @@ function mikesAjax(i) {
             $("#colleges" + i).append(infoDiv);
         }
     }).then(response => {
-        // console.log(response);
 
         var results = response.results;
         schoolNameSearch = results[0].school.name;
@@ -410,7 +377,6 @@ function mikesAjax(i) {
         //Tuition (in and out of state)
         var tuitionInState = results[0][2013].cost.tuition.in_state;
         var tuitionOutState = results[0][2013].cost.tuition.out_of_state;
-        // console.log(schoolNameSearch + " " + admissionRate + " " + actMidpoint + " " + satMidpoint + " " + tuitionInState + " " + tuitionOutState);
 
         //Add Card for School Info
 
@@ -418,8 +384,6 @@ function mikesAjax(i) {
         var infoDiv = $("<p>");
         infoDiv.attr("class", "card-text");
         infoDiv.attr("id", "school-details");
-        // $("#school-details").attr("style", "display: inline-block;");
-
 
         infoDiv.html(
             "<strong>Admission Rate:</strong> " + checkNullandNum(admissionRate) + "<br>" +
@@ -429,14 +393,8 @@ function mikesAjax(i) {
             "<strong>Out-of-State Tuition:</strong> " + checkNullandNum(tuitionOutState)
         );
 
-       
-
-        //Datagov Populate
         //Append divs to main dropdown
-
         $("#colleges" + i).append(infoDiv);
-
-
-    });// End of Mike ajax
+    });
 }
 
