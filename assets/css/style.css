@@ -48,6 +48,13 @@ p#edReqs.card-text {
     
 }
 
+.occupation-title {
+    cursor: pointer;
+}
+
+#submitBtn {
+    cursor: pointer;
+}
 
 
 
